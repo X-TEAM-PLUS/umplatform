@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.platform.admin.dao.ResourceDao">
+    <resultMap id="BaseResultMap" type="com.platform.admin.domain.Resource">
+        <id column="ID" property="id" jdbcType="VARCHAR"/>
+        <result column="ICON" property="icon" jdbcType="VARCHAR"/>
+        <result column="NAME" property="name" jdbcType="VARCHAR"/>
+        <result column="UPDATED" property="updated" jdbcType="TIMESTAMP"/>
+        <result column="IS_CAN_MODIFY" property="isCanModify" jdbcType="VARCHAR"/>
+        <result column="REMARK" property="remark" jdbcType="VARCHAR"/>
+        <result column="OPERATOR" property="operator" jdbcType="VARCHAR"/>
+        <result column="CREATED" property="created" jdbcType="TIMESTAMP"/>
+        <result column="URL" property="url" jdbcType="VARCHAR"/>
+        <result column="RESOURCE_TYPE" property="resourceType" jdbcType="VARCHAR"/>
+        <result column="PARENT_ID" property="parentId" jdbcType="VARCHAR"/>
+        <result column="APP_ID" property="appId" jdbcType="VARCHAR"/>
+
+    </resultMap>
+    <!--删除记录-->
+    <delete id="delete" parameterType="com.platform.admin.domain.Resource">
+      delete from T_MANAGE_RESOURCE  where ID=#{id,jdbcType=VARCHAR}
+  </delete>
+
+    <!--插入记录-->
+    <insert id="insert" parameterType="com.platform.admin.domain.Resource">
+        <selectKey keyProperty="id" resultType="String" order="BEFORE">
+            select uuid()
+        </selectKey>
+        insert into T_MANAGE_RESOURCE ( ID
+        , ICON
+        , NAME
+        , UPDATED
+        , IS_CAN_MODIFY
+        , REMARK
+        , OPERATOR
+        , CREATED
+        , URL
+        , RESOURCE_TYPE
+        , PARENT_ID
+        , APP_ID
+        )values(#{id,jdbcType=VARCHAR}
+        , #{icon,jdbcType=VARCHAR}
+        , #{name,jdbcType=VARCHAR}
+        , #{updated,jdbcType=TIMESTAMP}
+        , #{isCanModify,jdbcType=VARCHAR}
+        , #{remark,jdbcType=VARCHAR}
+        , #{operator,jdbcType=VARCHAR}
+        , #{created,jdbcType=TIMESTAMP}
+        , #{url,jdbcType=VARCHAR}
+        , #{resourceType,jdbcType=VARCHAR}
+        , #{parentId,jdbcType=VARCHAR}
+        , #{appId,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <!--更新记录-->
+    <update id="update" parameterType="com.platform.admin.domain.Resource">
+    update  T_MANAGE_RESOURCE
+    <set>
+        <trim prefix="" suffix="" suffixOverrides=",">
+            <if test="icon!=null">
+                ICON=#{icon,jdbcType=VARCHAR},
+            </if>
+            <if test="name!=null">
+                NAME=#{name,jdbcType=VARCHAR},
+            </if>
+            <if test="updated!=null">
+                UPDATED=#{updated,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isCanModify!=null">
+                IS_CAN_MODIFY=#{isCanModify,jdbcType=VARCHAR},
+            </if>
+            <if test="remark!=null">
+                REMARK=#{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="operator!=null">
+                OPERATOR=#{operator,jdbcType=VARCHAR},
+            </if>
+            <if test="url!=null">
+                URL=#{url,jdbcType=VARCHAR},
+            </if>
+            <if test="resourceType!=null">
+                RESOURCE_TYPE=#{resourceType,jdbcType=VARCHAR},
+            </if>
+            <if test="parentId!=null">
+                PARENT_ID=#{parentId,jdbcType=VARCHAR},
+            </if>
+            <if test="appId!=null">
+                APP_ID=#{appId,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </set>
+  where ID=#{id,jdbcType=VARCHAR}
+</update>
+
+    <!--查询单条记录-->
+    <select id="get" resultMap="BaseResultMap" parameterType="com.platform.admin.domain.Resource">
+    select  ICON
+ , NAME
+ , UPDATED
+ , IS_CAN_MODIFY
+ , ID
+ , REMARK
+ , OPERATOR
+ , CREATED
+ , URL
+ , RESOURCE_TYPE
+ , PARENT_ID
+ , APP_ID
+ from T_MANAGE_RESOURCE  where ID=#{id,jdbcType=VARCHAR}
+</select>
+
+    <!--查询记录-->
+    <select id="queryAll" resultMap="BaseResultMap">
+      select  ICON
+ , NAME
+ , UPDATED
+ , IS_CAN_MODIFY
+ , ID
+ , REMARK
+ , OPERATOR
+ , CREATED
+ , URL
+ , RESOURCE_TYPE
+ , PARENT_ID
+ , APP_ID
+ from T_MANAGE_RESOURCE
+  order BY CREATED
+</select>
+
+    <!--查询记录-->
+    <select id="query" resultMap="BaseResultMap" parameterType="com.platform.admin.domain.Resource">
+        select ICON
+        , NAME
+        , UPDATED
+        , IS_CAN_MODIFY
+        , ID
+        , REMARK
+        , OPERATOR
+        , CREATED
+        , URL
+        , RESOURCE_TYPE
+        , PARENT_ID
+        , APP_ID
+        from T_MANAGE_RESOURCE
+        <where>
+            <if test="icon!= null and icon!= ''">
+                <![CDATA[   and ICON = #{icon,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="name!= null and name!= ''">
+                <![CDATA[   and NAME = #{name,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="updated!= null and updated!= ''">
+                <![CDATA[   and UPDATED = #{updated,jdbcType=TIMESTAMP}]]>
+            </if>
+            <if test="isCanModify!= null and isCanModify!= ''">
+                <![CDATA[   and IS_CAN_MODIFY = #{isCanModify,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="id!= null and id!= ''">
+                <![CDATA[   and ID = #{id,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="remark!= null and remark!= ''">
+                <![CDATA[   and REMARK = #{remark,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="operator!= null and operator!= ''">
+                <![CDATA[   and OPERATOR = #{operator,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="created!= null and created!= ''">
+                <![CDATA[   and CREATED = #{created,jdbcType=TIMESTAMP}]]>
+            </if>
+            <if test="url!= null and url!= ''">
+                <![CDATA[   and URL = #{url,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="resourceType!= null and resourceType!= ''">
+                <![CDATA[   and RESOURCE_TYPE = #{resourceType,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="parentId!= null and parentId!= ''">
+                <![CDATA[   and PARENT_ID = #{parentId,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="appId!= null and appId!= ''">
+                <![CDATA[   and APP_ID = #{appId,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="userId!= null and userId!= ''">
+                <![CDATA[
+                and id  IN(select resource_id from t_manage_role_resource where role_id
+		      IN(select role_id from t_manage_user_role where user_id= #{userId,jdbcType=VARCHAR}
+		      )
+            )
+               ]]>
+            </if>
+        </where>
+        order BY CREATED
+    </select>
+</mapper>

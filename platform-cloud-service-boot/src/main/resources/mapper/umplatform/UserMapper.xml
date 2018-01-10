@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.platform.admin.dao.UserDao">
+    <resultMap id="BaseResultMap" type="com.platform.admin.domain.User">
+        <id column="ID" property="id" jdbcType="VARCHAR"/>
+        <result column="IS_ADMINISTRATOR" property="isAdministrator" jdbcType="INTEGER"/>
+        <result column="LOGIN_COUNT" property="loginCount" jdbcType="INTEGER"/>
+        <result column="AREA_CODE" property="areaCode" jdbcType="VARCHAR"/>
+        <result column="LAST_LOGIN_TIME" property="lastLoginTime" jdbcType="TIMESTAMP"/>
+        <result column="REAL_NAME" property="realName" jdbcType="VARCHAR"/>
+        <result column="REMARK" property="remark" jdbcType="VARCHAR"/>
+        <result column="LOCKED" property="locked" jdbcType="VARCHAR"/>
+        <result column="OPERATOR" property="operator" jdbcType="VARCHAR"/>
+        <result column="CREATED" property="created" jdbcType="TIMESTAMP"/>
+        <result column="ASK" property="ask" jdbcType="VARCHAR"/>
+        <result column="ICON" property="icon" jdbcType="VARCHAR"/>
+        <result column="MOBILE_NO" property="mobileNo" jdbcType="VARCHAR"/>
+        <result column="PHONE_NO" property="phoneNo" jdbcType="VARCHAR"/>
+        <result column="USER_NAME" property="userName" jdbcType="VARCHAR"/>
+        <result column="UPDATED" property="updated" jdbcType="TIMESTAMP"/>
+        <result column="EMAIL" property="email" jdbcType="VARCHAR"/>
+        <result column="STR_KEY" property="strKey" jdbcType="VARCHAR"/>
+        <result column="PASSWORD" property="password" jdbcType="VARCHAR"/>
+        <result column="ORGANIZATION_ID" property="organizationId" jdbcType="VARCHAR"/>
+    </resultMap>
+    <!--删除记录-->
+    <delete id="delete" parameterType="com.platform.admin.domain.User">
+        delete from T_MANAGE_USER where ID=#{id,jdbcType=VARCHAR}
+    </delete>
+
+    <!--插入记录-->
+    <insert id="insert" parameterType="com.platform.admin.domain.User"  useGeneratedKeys="true" keyProperty="id">
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            select uuid()
+        </selectKey>
+        insert into T_MANAGE_USER (ID,IS_ADMINISTRATOR
+        , LOGIN_COUNT
+        , AREA_CODE
+        , LAST_LOGIN_TIME
+        , REAL_NAME
+        , REMARK
+        , LOCKED
+        , OPERATOR
+        , CREATED
+        , ASK
+        , ICON
+        , MOBILE_NO
+        , PHONE_NO
+        , USER_NAME
+        , UPDATED
+        , EMAIL
+        , STR_KEY
+        , PASSWORD
+        , ORGANIZATION_ID
+        )values(#{id,jdbcType=VARCHAR}
+        , #{isAdministrator,jdbcType=VARCHAR}
+        , #{loginCount,jdbcType=INTEGER}
+        , #{areaCode,jdbcType=VARCHAR}
+        , #{lastLoginTime,jdbcType=TIMESTAMP}
+        , #{realName,jdbcType=VARCHAR}
+        , #{remark,jdbcType=VARCHAR}
+        , #{locked,jdbcType=VARCHAR}
+        , #{operator,jdbcType=VARCHAR}
+        , #{created,jdbcType=TIMESTAMP}
+        , #{ask,jdbcType=VARCHAR}
+        , #{icon,jdbcType=VARCHAR}
+        , #{mobileNo,jdbcType=VARCHAR}
+        , #{phoneNo,jdbcType=VARCHAR}
+        , #{userName,jdbcType=VARCHAR}
+        , #{updated,jdbcType=TIMESTAMP}
+        , #{email,jdbcType=VARCHAR}
+        , #{strKey,jdbcType=VARCHAR}
+        , #{password,jdbcType=VARCHAR}
+        , #{organizationId,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <!--更新记录-->
+    <update id="update" parameterType="com.platform.admin.domain.User">
+        update T_MANAGE_USER set
+         LOGIN_COUNT=#{loginCount,jdbcType=INTEGER}
+        , AREA_CODE=#{areaCode,jdbcType=VARCHAR}
+        ,LAST_LOGIN_TIME=#{lastLoginTime,jdbcType=TIMESTAMP}
+        , REAL_NAME=#{realName,jdbcType=VARCHAR}
+        , REMARK=#{remark,jdbcType=VARCHAR}
+        , LOCKED=#{locked,jdbcType=VARCHAR}
+        , ASK=#{ask,jdbcType=VARCHAR}
+        , ICON=#{icon,jdbcType=VARCHAR}
+        , MOBILE_NO=#{mobileNo,jdbcType=VARCHAR}
+        , PHONE_NO=#{phoneNo,jdbcType=VARCHAR}
+        , USER_NAME=#{userName,jdbcType=VARCHAR}
+        , UPDATED=#{updated,jdbcType=TIMESTAMP}
+        , EMAIL=#{email,jdbcType=VARCHAR}
+        , STR_KEY=#{strKey,jdbcType=VARCHAR}
+        , PASSWORD=#{password,jdbcType=VARCHAR}
+         , ORGANIZATION_ID=#{organizationId,jdbcType=VARCHAR}
+        where ID=#{id,jdbcType=VARCHAR}
+    </update>
+
+    <!--更新记录-->
+    <update id="lock" parameterType="com.platform.admin.domain.User">
+        update T_MANAGE_USER set
+         LOCKED=#{locked,jdbcType=VARCHAR}
+          , UPDATED=#{updated,jdbcType=TIMESTAMP}
+        where ID=#{id,jdbcType=VARCHAR} AND IS_ADMINISTRATOR=0
+    </update>
+
+    <!--查询单条记录-->
+    <select id="get" resultMap="BaseResultMap" parameterType="com.platform.admin.domain.User">
+        select IS_ADMINISTRATOR
+        , LOGIN_COUNT
+        , AREA_CODE
+        , LAST_LOGIN_TIME
+        , REAL_NAME
+        , REMARK
+        , LOCKED
+        , OPERATOR
+        , CREATED
+        , ASK
+        , ICON
+        , MOBILE_NO
+        , PHONE_NO
+        , USER_NAME
+        , UPDATED
+        , ID
+        , EMAIL
+        , STR_KEY
+        , PASSWORD
+        ,ORGANIZATION_ID
+        from T_MANAGE_USER
+        <where>
+            <if test="id!= null and id!= ''">
+                <![CDATA[   and ID = #{id,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="userName!= null and userName!= ''">
+                <![CDATA[   and USER_NAME = #{userName,jdbcType=VARCHAR}]]>
+            </if>
+        </where>
+    </select>
+
+    <!--查询记录-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select IS_ADMINISTRATOR
+        , LOGIN_COUNT
+        , AREA_CODE
+        , LAST_LOGIN_TIME
+        , REAL_NAME
+        , REMARK
+        , LOCKED
+        , OPERATOR
+        , CREATED
+        , ASK
+        , ICON
+        , MOBILE_NO
+        , PHONE_NO
+        , USER_NAME
+        , UPDATED
+        , ID
+        , EMAIL
+        , STR_KEY
+         , PASSWORD
+         ,ORGANIZATION_ID
+        from T_MANAGE_USER
+    </select>
+
+    <!--查询记录-->
+    <select id="query" resultMap="BaseResultMap" parameterType="com.platform.admin.domain.User">
+        select IS_ADMINISTRATOR
+        , LOGIN_COUNT
+        , AREA_CODE
+        , LAST_LOGIN_TIME
+        , REAL_NAME
+        , REMARK
+        , LOCKED
+        , OPERATOR
+        , CREATED
+        , ASK
+        , ICON
+        , MOBILE_NO
+        , PHONE_NO
+        , USER_NAME
+        , UPDATED
+        , ID
+        , EMAIL
+        , STR_KEY
+        , PASSWORD
+        ,ORGANIZATION_ID
+        from T_MANAGE_USER
+        <where>
+            <if test="isAdministrator!= null and isAdministrator!= ''">
+                <![CDATA[   and IS_ADMINISTRATOR = #{isAdministrator,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="loginCount!= null and loginCount!= ''">
+                <![CDATA[   and LOGIN_COUNT = #{loginCount,jdbcType=INTEGER}]]>
+            </if>
+            <if test="areaCode!= null and areaCode!= ''">
+                <![CDATA[   and AREA_CODE = #{areaCode,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="lastLoginTime!= null and lastLoginTime!= ''">
+                <![CDATA[   and LAST_LOGIN_TIME = #{lastLoginTime,jdbcType=TIMESTAMP}]]>
+            </if>
+            <if test="realName!= null and realName!= ''">
+                <![CDATA[   and REAL_NAME = #{realName,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="remark!= null and remark!= ''">
+                <![CDATA[   and REMARK = #{remark,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="locked!= null and locked!= ''">
+                <![CDATA[   and LOCKED = #{locked,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="operator!= null and operator!= ''">
+                <![CDATA[   and OPERATOR = #{operator,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="created!= null and created!= ''">
+                <![CDATA[   and CREATED = #{created,jdbcType=TIMESTAMP}]]>
+            </if>
+            <if test="ask!= null and ask!= ''">
+                <![CDATA[   and ASK = #{ask,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="icon!= null and icon!= ''">
+                <![CDATA[   and ICON = #{icon,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="mobileNo!= null and mobileNo!= ''">
+                <![CDATA[   and MOBILE_NO = #{mobileNo,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="phoneNo!= null and phoneNo!= ''">
+                <![CDATA[   and PHONE_NO = #{phoneNo,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="userName!= null and userName!= ''">
+                <![CDATA[ and USER_NAME LIKE #{userName,jdbcType=VARCHAR}"%"]]>
+            </if>
+            <if test="updated!= null and updated!= ''">
+                <![CDATA[   and UPDATED = #{updated,jdbcType=TIMESTAMP}]]>
+            </if>
+            <if test="id!= null and id!= ''">
+                <![CDATA[   and ID = #{id,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="email!= null and email!= ''">
+                <![CDATA[   and EMAIL = #{email,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="strKey!= null and strKey!= ''">
+                <![CDATA[   and STR_KEY = #{strKey,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="password!= null and password!= ''">
+                <![CDATA[   and PASSWORD = #{password,jdbcType=VARCHAR}]]>
+            </if>
+        </where>
+        limit #{start},#{limit}
+    </select>
+
+    <!--查询记录数-->
+    <select id="queryCount" resultType="long" parameterType="com.platform.admin.domain.User">
+        select count(1) from T_MANAGE_USER
+        <where>
+            <if test="locked!=null and locked!=''">
+                <![CDATA[ and LOCKED=#{locked,jdbcType=INTEGER}]]>
+            </if>
+            <if test="updated!=null and updated!=''">
+                <![CDATA[ and UPDATED=#{updated,jdbcType=TIMESTAMP}]]>
+            </if>
+            <if test="userName!=null and userName!=''">
+                <![CDATA[ and USER_NAME LIKE #{userName,jdbcType=VARCHAR}"%"]]>
+            </if>
+            <if test="phoneNo!=null and phoneNo!=''">
+                <![CDATA[ and PHONE_NO=#{phoneNo,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="areaCode!=null and areaCode!=''">
+                <![CDATA[ and AREA_CODE=#{areaCode,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="email!=null and email!=''">
+                <![CDATA[ and EMAIL=#{email,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="realName!=null and realName!=''">
+                <![CDATA[ and REAL_NAME=#{realName,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="loginCount!=null and loginCount!=''">
+                <![CDATA[ and LOGIN_COUNT=#{loginCount,jdbcType=INTEGER}]]>
+            </if>
+            <if test="organizationId!=null and organizationId!=''">
+                <![CDATA[ and ORGANIZATION_ID=#{organizationId,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="mobileNo!=null and mobileNo!=''">
+                <![CDATA[ and MOBILE_NO=#{mobileNo,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="created!=null and created!=''">
+                <![CDATA[ and CREATED=#{created,jdbcType=TIMESTAMP}]]>
+            </if>
+            <if test="password!=null and password!=''">
+                <![CDATA[ and PASSWORD=#{password,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="operator!=null and operator!=''">
+                <![CDATA[ and OPERATOR=#{operator,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="lastLoginTime!=null and lastLoginTime!=''">
+                <![CDATA[ and LAST_LOGIN_TIME=#{lastLoginTime,jdbcType=TIMESTAMP}]]>
+            </if>
+            <if test="ask!=null and ask!=''">
+                <![CDATA[ and ASK=#{ask,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="id!=null and id!=''">
+                <![CDATA[ and ID=#{id,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="icon!=null and icon!=''">
+                <![CDATA[ and ICON=#{icon,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="strKey!=null and strKey!=''">
+                <![CDATA[ and STR_KEY=#{strKey,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="remark!=null and remark!=''">
+                <![CDATA[ and REMARK=#{remark,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="isAdministrator!=null and isAdministrator!=''">
+                <![CDATA[ and IS_ADMINISTRATOR=#{isAdministrator,jdbcType=INTEGER}]]>
+            </if>
+        </where>
+
+    </select>
+</mapper>

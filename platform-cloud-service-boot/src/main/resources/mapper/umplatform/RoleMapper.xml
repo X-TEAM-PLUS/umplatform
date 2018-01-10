@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.platform.admin.dao.RoleDao">
+    <resultMap id="BaseResultMap" type="com.platform.admin.domain.Role">
+        <id column="ID" property="id" jdbcType="VARCHAR"/>
+        <result column="ICON" property="icon" jdbcType="VARCHAR"/>
+        <result column="UPDATED" property="updated" jdbcType="TIMESTAMP"/>
+        <result column="REMARK" property="remark" jdbcType="VARCHAR"/>
+        <result column="OPERATOR" property="operator" jdbcType="VARCHAR"/>
+        <result column="ROLE_NAME" property="roleName" jdbcType="VARCHAR"/>
+        <result column="CREATED" property="created" jdbcType="TIMESTAMP"/>
+        <result column="ORGANIZATION_ID" property="organizationId" jdbcType="VARCHAR"/>
+
+    </resultMap>
+    <!--删除记录-->
+    <delete id="delete" parameterType="com.platform.admin.domain.Role">
+        delete from T_MANAGE_ROLE where ID=#{id,jdbcType=VARCHAR}
+    </delete>
+
+    <!--插入记录-->
+    <insert id="insert" parameterType="com.platform.admin.domain.Role">
+        <selectKey keyProperty="id" resultType="String" order="BEFORE">
+            select uuid()
+        </selectKey>
+        insert into T_MANAGE_ROLE ( ID
+        , ICON
+        , UPDATED
+        , REMARK
+        , OPERATOR
+        , ROLE_NAME
+        , CREATED
+        , ORGANIZATION_ID
+        )values(#{id,jdbcType=VARCHAR}
+        , #{icon,jdbcType=VARCHAR}
+        , #{updated,jdbcType=TIMESTAMP}
+        , #{remark,jdbcType=VARCHAR}
+        , #{operator,jdbcType=VARCHAR}
+        , #{roleName,jdbcType=VARCHAR}
+        , #{created,jdbcType=TIMESTAMP}
+        , #{organizationId,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <!--更新记录-->
+    <update id="update" parameterType="com.platform.admin.domain.Role">
+    update  T_MANAGE_ROLE set ICON=#{icon,jdbcType=VARCHAR}
+ , UPDATED=#{updated,jdbcType=TIMESTAMP}
+ , REMARK=#{remark,jdbcType=VARCHAR}
+ , OPERATOR=#{operator,jdbcType=VARCHAR}
+ , ROLE_NAME=#{roleName,jdbcType=VARCHAR}
+ , ORGANIZATION_ID=#{organizationId,jdbcType=VARCHAR}
+  where ID=#{id,jdbcType=VARCHAR}
+</update>
+
+    <!--查询单条记录-->
+    <select id="get" resultMap="BaseResultMap" parameterType="com.platform.admin.domain.Role">
+        select ICON
+        , UPDATED
+        , ID
+        , REMARK
+        , OPERATOR
+        , ROLE_NAME
+        , CREATED
+        , ORGANIZATION_ID
+        from T_MANAGE_ROLE where ID=#{id,jdbcType=VARCHAR}
+    </select>
+
+    <!--查询记录-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select ICON
+        , UPDATED
+        , ID
+        , REMARK
+        , OPERATOR
+        , ROLE_NAME
+        , CREATED
+        , ORGANIZATION_ID
+        from T_MANAGE_ROLE
+    </select>
+
+    <!--查询记录-->
+    <select id="query" resultMap="BaseResultMap" parameterType="com.platform.admin.domain.Role">
+        select ICON
+        , UPDATED
+        , ID
+        , REMARK
+        , OPERATOR
+        , ROLE_NAME
+        , CREATED
+        , ORGANIZATION_ID
+        from T_MANAGE_ROLE
+        <where>
+            <if test="icon!= null and icon!= ''">
+                <![CDATA[   and ICON = #{icon,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="updated!= null and updated!= ''">
+                <![CDATA[   and UPDATED = #{updated,jdbcType=TIMESTAMP}]]>
+            </if>
+            <if test="id!= null and id!= ''">
+                <![CDATA[   and ID = #{id,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="remark!= null and remark!= ''">
+                <![CDATA[   and REMARK = #{remark,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="operator!= null and operator!= ''">
+                <![CDATA[   and OPERATOR = #{operator,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="roleName!= null and roleName!= ''">
+                <![CDATA[ and ROLE_NAME LIKE  #{roleName,jdbcType=VARCHAR}"%"]]>
+            </if>
+            <if test="created!= null and created!= ''">
+                <![CDATA[   and CREATED = #{created,jdbcType=TIMESTAMP}]]>
+            </if>
+            <if test="organizationId!= null and organizationId!= ''">
+                <![CDATA[   and ORGANIZATION_ID = #{organizationId,jdbcType=VARCHAR}]]>
+            </if>
+        </where>
+        ORDER BY CREATED DESC
+        limit #{start},#{limit}
+
+    </select>
+
+    <!--查询记录数-->
+    <select id="queryCount"   resultType="long"   parameterType="com.platform.admin.domain.Role">
+        select count(1) from T_MANAGE_ROLE
+        <where>
+            <if test="created!=null and created!=''">
+                <![CDATA[ and CREATED=#{created,jdbcType=TIMESTAMP}]]>
+            </if>
+            <if test="operator!=null and operator!=''">
+                <![CDATA[ and OPERATOR=#{operator,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="updated!=null and updated!=''">
+                <![CDATA[ and UPDATED=#{updated,jdbcType=TIMESTAMP}]]>
+            </if>
+            <if test="id!=null and id!=''">
+                <![CDATA[ and ID=#{id,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="roleName!=null and roleName!=''">
+                <![CDATA[ and ROLE_NAME LIKE  #{roleName,jdbcType=VARCHAR}"%"]]>
+            </if>
+            <if test="icon!=null and icon!=''">
+                <![CDATA[ and ICON=#{icon,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="remark!=null and remark!=''">
+                <![CDATA[ and REMARK=#{remark,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="organizationId!=null and organizationId!=''">
+                <![CDATA[ and ORGANIZATION_ID=#{organizationId,jdbcType=VARCHAR}]]>
+            </if>
+        </where>
+
+    </select>
+</mapper>

@@ -1,0 +1,25 @@
+server:
+  port: 8120
+eureka:
+  client:
+    service-url:
+      defaultZone: @mvn.spring.cloud.euerka.server@
+spring:
+  application:
+    name: platform-webapp
+  mvc:
+    static-path-pattern: /static/**
+    locale: zh_CN
+    date-format: yyyy-MM-dd HH:mm:ss
+  freemarker:
+    template-loader-path: classpath:/templates
+    request-context-attribute: request
+    charset: UTF-8
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    joda-date-time-format:  yyyy-MM-dd HH:mm:ss
+security:
+  des:
+    key: E3Dvv73vv73vv73vv70477
+  authenticate:
+    url: /login

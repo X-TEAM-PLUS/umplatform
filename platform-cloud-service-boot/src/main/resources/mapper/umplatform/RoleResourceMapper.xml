@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.platform.admin.dao.RoleResourceDao">
+    <resultMap id="BaseResultMap" type="com.platform.admin.domain.RoleResource">
+        <id column="ID" property="id" jdbcType="VARCHAR"/>
+        <result column="UPDATED" property="updated" jdbcType="TIMESTAMP"/>
+        <result column="AUTHORIZE_LEVEL" property="authorizeLevel" jdbcType="VARCHAR"/>
+        <result column="OPERATOR" property="operator" jdbcType="VARCHAR"/>
+        <result column="CREATED" property="created" jdbcType="TIMESTAMP"/>
+        <result column="RESOURCE_ID" property="resourceId" jdbcType="VARCHAR"/>
+        <result column="ROLE_ID" property="roleId" jdbcType="VARCHAR"/>
+
+    </resultMap>
+    <!--删除记录-->
+    <delete id="delete" parameterType="com.platform.admin.domain.RoleResource">
+        delete from T_MANAGE_ROLE_RESOURCE where ID=#{id,jdbcType=VARCHAR}
+    </delete>
+
+    <delete id="deleteWithRoleId" parameterType="java.lang.String" >
+    delete from T_MANAGE_ROLE_RESOURCE where ROLE_ID=#{roleId,jdbcType=VARCHAR}
+</delete>
+
+    <delete id="deleteWithResourceId" parameterType="java.lang.String" >
+        delete from T_MANAGE_ROLE_RESOURCE where RESOURCE_ID=#{resourceId,jdbcType=VARCHAR}
+    </delete>
+
+    <!--插入记录-->
+    <insert id="insert" parameterType="com.platform.admin.domain.RoleResource">
+        <selectKey keyProperty="id" resultType="String" order="BEFORE">
+            select uuid()
+        </selectKey>
+        insert into T_MANAGE_ROLE_RESOURCE ( ID
+        , UPDATED
+        , AUTHORIZE_LEVEL
+        , OPERATOR
+        , CREATED
+        , RESOURCE_ID
+        , ROLE_ID
+        )values(#{id,jdbcType=VARCHAR}
+        , #{updated,jdbcType=TIMESTAMP}
+        , #{authorizeLevel,jdbcType=VARCHAR}
+        , #{operator,jdbcType=VARCHAR}
+        , #{created,jdbcType=TIMESTAMP}
+        , #{resourceId,jdbcType=VARCHAR}
+        , #{roleId,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <!--更新记录-->
+    <update id="update" parameterType="com.platform.admin.domain.RoleResource">
+        update T_MANAGE_ROLE_RESOURCE set UPDATED=#{updated,jdbcType=TIMESTAMP}
+        , AUTHORIZE_LEVEL=#{authorizeLevel,jdbcType=VARCHAR}
+        , OPERATOR=#{operator,jdbcType=VARCHAR}
+        , CREATED=#{created,jdbcType=TIMESTAMP}
+        , RESOURCE_ID=#{resourceId,jdbcType=VARCHAR}
+        , ROLE_ID=#{roleId,jdbcType=VARCHAR}
+        where ID=#{id,jdbcType=VARCHAR}
+    </update>
+
+    <!--查询单条记录-->
+    <select id="get" resultMap="BaseResultMap" parameterType="com.platform.admin.domain.RoleResource">
+        select UPDATED
+        , ID
+        , AUTHORIZE_LEVEL
+        , OPERATOR
+        , CREATED
+        , RESOURCE_ID
+        , ROLE_ID
+        from T_MANAGE_ROLE_RESOURCE where ID=#{id,jdbcType=VARCHAR}
+    </select>
+
+    <!--查询记录-->
+    <select id="queryWithRoleId" resultMap="BaseResultMap">
+        select UPDATED
+        , ID
+        , AUTHORIZE_LEVEL
+        , OPERATOR
+        , CREATED
+        , RESOURCE_ID
+        , ROLE_ID
+        from T_MANAGE_ROLE_RESOURCE
+        WHERE ROLE_ID IN (#{roleId,jdbcType=VARCHAR})
+    </select>
+
+    <!--查询记录-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select UPDATED
+        , ID
+        , AUTHORIZE_LEVEL
+        , OPERATOR
+        , CREATED
+        , RESOURCE_ID
+        , ROLE_ID
+        from T_MANAGE_ROLE_RESOURCE
+    </select>
+
+    <!--查询记录-->
+    <select id="query" resultMap="BaseResultMap" parameterType="com.platform.admin.domain.RoleResource">
+        select UPDATED
+        , ID
+        , AUTHORIZE_LEVEL
+        , OPERATOR
+        , CREATED
+        , RESOURCE_ID
+        , ROLE_ID
+        from T_MANAGE_ROLE_RESOURCE
+        <where>
+            <if test="updated!= null and updated!= ''">
+                <![CDATA[   and UPDATED = #{updated,jdbcType=TIMESTAMP}]]>
+            </if>
+            <if test="id!= null and id!= ''">
+                <![CDATA[   and ID = #{id,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="authorizeLevel!= null and authorizeLevel!= ''">
+                <![CDATA[   and AUTHORIZE_LEVEL = #{authorizeLevel,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="operator!= null and operator!= ''">
+                <![CDATA[   and OPERATOR = #{operator,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="created!= null and created!= ''">
+                <![CDATA[   and CREATED = #{created,jdbcType=TIMESTAMP}]]>
+            </if>
+            <if test="resourceId!= null and resourceId!= ''">
+                <![CDATA[   and RESOURCE_ID = #{resourceId,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="roleId!= null and roleId!= ''">
+                <![CDATA[   and ROLE_ID = #{roleId,jdbcType=VARCHAR}]]>
+            </if>
+        </where>
+    </select>
+</mapper>

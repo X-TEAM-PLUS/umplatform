@@ -1,0 +1,53 @@
+server:
+  port: 8021
+spring:
+  datasource:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        url: @mvn.jdbc.url@
+        username: @mvn.jdbc.user@
+        password: @mvn.jdbc.pwd@
+  application:
+    name: platform-admin-service-provider
+  http:
+    converters:
+      preferred-json-mapper: jackson
+    encoding:
+      charset: UTF-8
+  mvc:
+    static-path-pattern: /static/**
+    locale: zh_CN
+    date-format: yyyy-MM-dd HH:mm:ss
+
+  jackson:
+    locale: zh_CN
+    date-format: yyyy-MM-dd HH:mm:ss
+    joda-date-time-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    deserialization: true
+    generator: true
+    mapper: true
+    parser: true
+    serialization: true
+    default-property-inclusion: non_null
+  redis:
+    host: 192.168.31.69
+    database: 0
+    port: 6379
+    pool:
+      max-active: 8
+      max-wait: -1
+      max-idle: 8
+      min-idle: 0
+mybatis:
+    typeAliasesPackage: com.platform.admin.dao
+    mapperLocations: classpath*:mapper/umplatform/*.xml
+eureka:
+    client:
+        service-url:
+            defaultZone: @mvn.spring.cloud.euerka.server@
+security:
+  des:
+    key: E3Dvv73vv73vv73vv70477
+  authenticate:
+    url: /login

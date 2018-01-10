@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.4.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.platform.admin</groupId>
+    <artifactId>platform-cloud-service-boot</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.mybatis.spring.boot.version>1.3.1</maven.mybatis.spring.boot.version>
+        <maven.spring.boot.starter.redis.version>1.4.7.RELEASE</maven.spring.boot.starter.redis.version>
+        <maven.springframework.version>4.2.4.RELEASE</maven.springframework.version>
+        <maven.mysql.driver.version>5.1.30</maven.mysql.driver.version>
+        <maven.druid.version>1.0.14</maven.druid.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.platform.admin</groupId>
+            <artifactId>platform-cloud-service-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.platform.admin</groupId>
+            <artifactId>platform-cloud-service-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>log4j-over-slf4j</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>slf4j-log4j12</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>log4j</artifactId>
+                    <groupId>log4j</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- Spring Cloud Netflix Eureka Client 依赖 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-eureka</artifactId>
+        </dependency>
+        <!-- mybatis -->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>${maven.mybatis.spring.boot.version}</version>
+        </dependency>
+        <!-- redis -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-redis</artifactId>
+        </dependency>
+        <!--spring-boot-starter-redis-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-redis</artifactId>
+            <version>${maven.spring.boot.starter.redis.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${maven.springframework.version}</version>
+        </dependency>
+        <!--druid-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>${maven.druid.version}</version>
+        </dependency>
+
+        <!--database driver-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${maven.mysql.driver.version}</version>
+        </dependency>
+
+        <!-- spring-boot-test -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-test</artifactId>
+            <version>1.4.1.RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- Spring Boot Test 依赖 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- Spring Cloud Netflix 依赖 -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-netflix</artifactId>
+                <version>1.3.1.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+
+    <profiles>
+        <profile>
+            <id>develop</id>
+            <properties>
+                <!-- euerka注册中心地址-->
+                <mvn.spring.cloud.euerka.server>http://localhost:8888/eureka/</mvn.spring.cloud.euerka.server>
+                <!--数据库连接-->
+                <mvn.jdbc.url>
+                    <![CDATA[jdbc:mysql://127.0.0.1:3306/umplatform?useUnicode=true&characterEncoding=utf-8]]></mvn.jdbc.url>
+                <mvn.jdbc.user>root</mvn.jdbc.user>
+                <mvn.jdbc.pwd>mysql</mvn.jdbc.pwd>
+                <!--日志输出目录-->
+                <mvn.log.path>d:/logs</mvn.log.path>
+                <mvn.log.level>DEBUG</mvn.log.level>
+            </properties>
+        </profile>
+        <profile>
+            <id>test</id>
+            <properties>
+                <!-- euerka注册中心地址-->
+                <mvn.spring.cloud.euerka.server>http://192.168.31.212:8888/eureka/</mvn.spring.cloud.euerka.server>
+                <!--数据库连接-->
+                <mvn.jdbc.url>
+                    <![CDATA[jdbc:mysql://113.209.111.211:3306/umplatform?useUnicode=true&characterEncoding=utf-8]]></mvn.jdbc.url>
+                <mvn.jdbc.user>umplatform</mvn.jdbc.user>
+                <mvn.jdbc.pwd>umplatform</mvn.jdbc.pwd>
+                <!--日志输出目录-->
+                <mvn.log.path>/var/log/bestlease</mvn.log.path>
+                <mvn.log.level>DEBUG</mvn.log.level>
+            </properties>
+        </profile>
+        <profile>
+            <id>production</id>
+            <properties>
+                <!-- euerka注册中心地址-->
+                <mvn.spring.cloud.euerka.server>
+                    http://cache-01:8888/eureka/,http://cache-02:8888/eureka/,http://cache-03:8888/eureka/
+                </mvn.spring.cloud.euerka.server>
+                <!--数据库连接-->
+                <mvn.jdbc.url>
+                    <![CDATA[jdbc:mysql://172.17.54.136:3306/bestlease?useUnicode=true&characterEncoding=utf-8]]></mvn.jdbc.url>
+                <mvn.jdbc.user>bestlease</mvn.jdbc.user>
+                <mvn.jdbc.pwd>bestlease</mvn.jdbc.pwd>
+                <!--日志输出目录-->
+                <mvn.log.path>/data/logs/bestlease</mvn.log.path>
+                <mvn.log.level>INFO</mvn.log.level>
+            </properties>
+        </profile>
+    </profiles>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>src/test/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>
+</project>

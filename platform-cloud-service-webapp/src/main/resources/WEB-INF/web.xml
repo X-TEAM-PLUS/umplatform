@@ -1,0 +1,14 @@
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee  http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         version="3.0">
+    <display-name>com.jinlianchu.schedule.webapp</display-name>
+    <!-- 激活Tomcat的defaultServlet来处理静态文件 -->
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/resources/js/*</url-pattern>
+        <url-pattern>/resources/css/*</url-pattern>
+        <url-pattern>/resources/images/*</url-pattern>
+        <url-pattern>/resources/fonts/*</url-pattern>
+    </servlet-mapping>
+
+</web-app>

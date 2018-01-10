@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.platform.admin.dao.OrganizationDao">
+    <resultMap id="BaseResultMap" type="com.platform.admin.domain.Organization">
+        <id column="ID" property="id" jdbcType="VARCHAR"/>
+        <result column="NAME" property="name" jdbcType="VARCHAR"/>
+        <result column="UPDATED" property="updated" jdbcType="TIMESTAMP"/>
+        <result column="REMARK" property="remark" jdbcType="VARCHAR"/>
+        <result column="OPERATOR" property="operator" jdbcType="VARCHAR"/>
+        <result column="CREATED" property="created" jdbcType="TIMESTAMP"/>
+        <result column="PARENT_ID" property="parentId" jdbcType="VARCHAR"/>
+        <result column="CODE" property="code" jdbcType="VARCHAR"/>
+
+    </resultMap>
+    <!--删除记录-->
+    <delete id="delete" parameterType="com.platform.admin.domain.Organization">
+        delete from T_MANAGE_ORGANIZATION where ID=#{id,jdbcType=VARCHAR}
+    </delete>
+
+    <!--插入记录-->
+    <insert id="insert" parameterType="com.platform.admin.domain.Organization">
+        <selectKey keyProperty="id" resultType="String" order="BEFORE">
+            select uuid()
+        </selectKey>
+        insert into T_MANAGE_ORGANIZATION ( ID
+        , NAME
+        , UPDATED
+        , REMARK
+        , OPERATOR
+        , CREATED
+        , PARENT_ID
+        , CODE
+        )values(#{id,jdbcType=VARCHAR}
+        , #{name,jdbcType=VARCHAR}
+        , #{updated,jdbcType=TIMESTAMP}
+        , #{remark,jdbcType=VARCHAR}
+        , #{operator,jdbcType=VARCHAR}
+        , #{created,jdbcType=TIMESTAMP}
+        , #{parentId,jdbcType=VARCHAR}
+        , #{code,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <!--更新记录-->
+    <update id="update" parameterType="com.platform.admin.domain.Organization">
+        update T_MANAGE_ORGANIZATION set NAME=#{name,jdbcType=VARCHAR}
+        , UPDATED=#{updated,jdbcType=TIMESTAMP}
+        , REMARK=#{remark,jdbcType=VARCHAR}
+        , OPERATOR=#{operator,jdbcType=VARCHAR}
+        , PARENT_ID=#{parentId,jdbcType=VARCHAR}
+        , CODE=#{code,jdbcType=VARCHAR}
+        where ID=#{id,jdbcType=VARCHAR}
+    </update>
+
+    <!--查询单条记录-->
+    <select id="get" resultMap="BaseResultMap" parameterType="com.platform.admin.domain.Organization">
+        select NAME
+        , UPDATED
+        , ID
+        , REMARK
+        , OPERATOR
+        , CREATED
+        , PARENT_ID
+        , CODE
+        from T_MANAGE_ORGANIZATION where ID=#{id,jdbcType=VARCHAR}
+    </select>
+
+    <!--查询记录-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select NAME
+        , UPDATED
+        , ID
+        , REMARK
+        , OPERATOR
+        , CREATED
+        , PARENT_ID
+        , CODE
+        from T_MANAGE_ORGANIZATION
+        order BY CREATED
+    </select>
+
+    <!--查询记录-->
+    <select id="query" resultMap="BaseResultMap" parameterType="com.platform.admin.domain.Organization">
+        select NAME
+        , UPDATED
+        , ID
+        , REMARK
+        , OPERATOR
+        , CREATED
+        , PARENT_ID
+        , CODE
+        from T_MANAGE_ORGANIZATION
+        <where>
+            <if test="name!= null and name!= ''">
+                <![CDATA[   and NAME = #{name,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="updated!= null and updated!= ''">
+                <![CDATA[   and UPDATED = #{updated,jdbcType=TIMESTAMP}]]>
+            </if>
+            <if test="id!= null and id!= ''">
+                <![CDATA[   and ID = #{id,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="remark!= null and remark!= ''">
+                <![CDATA[   and REMARK = #{remark,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="operator!= null and operator!= ''">
+                <![CDATA[   and OPERATOR = #{operator,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="created!= null and created!= ''">
+                <![CDATA[   and CREATED = #{created,jdbcType=TIMESTAMP}]]>
+            </if>
+            <if test="parentId!= null and parentId!= ''">
+                <![CDATA[   and PARENT_ID = #{parentId,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="code!= null and code!= ''">
+                <![CDATA[   and CODE = #{code,jdbcType=VARCHAR}]]>
+            </if>
+        </where>
+          order by CREATED
+    </select>
+    <!--查询记录-->
+    <select id="queryParentOrgList" resultMap="BaseResultMap" parameterType="com.platform.admin.domain.Organization">
+        select NAME
+        , UPDATED
+        , ID
+        , REMARK
+        , OPERATOR
+        , CREATED
+        , PARENT_ID
+        , CODE
+        from T_MANAGE_ORGANIZATION
+        <where>
+                <![CDATA[   and PARENT_ID = '']]>
+        </where>
+    </select>
+</mapper>

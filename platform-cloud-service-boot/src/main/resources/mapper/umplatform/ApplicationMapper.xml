@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.platform.admin.dao.ApplicationDao">
+    <resultMap id="BaseResultMap" type="com.platform.admin.domain.Application">
+        <id column="ID" property="id" jdbcType="VARCHAR"/>
+        <result column="ICON" property="icon" jdbcType="VARCHAR"/>
+        <result column="NAME" property="name" jdbcType="VARCHAR"/>
+        <result column="LOGOUT_URL" property="logoutUrl" jdbcType="VARCHAR"/>
+        <result column="UPDATED" property="updated" jdbcType="TIMESTAMP"/>
+        <result column="IS_CAN_MODIFY" property="isCanModify" jdbcType="VARCHAR"/>
+        <result column="CIPHER_KEY" property="cipherKey" jdbcType="VARCHAR"/>
+        <result column="MD5_KEY" property="md5Key" jdbcType="VARCHAR"/>
+        <result column="REMARK" property="remark" jdbcType="VARCHAR"/>
+        <result column="OPERATOR" property="operator" jdbcType="VARCHAR"/>
+        <result column="CREATED" property="created" jdbcType="TIMESTAMP"/>
+        <result column="URL" property="url" jdbcType="VARCHAR"/>
+
+    </resultMap>
+    <!--删除记录-->
+    <delete id="delete" parameterType="com.platform.admin.domain.Application">
+        delete from T_MANAGE_APPLICATION where ID=#{id,jdbcType=VARCHAR}
+    </delete>
+
+    <!--插入记录-->
+    <insert id="insert" parameterType="com.platform.admin.domain.Application">
+        <selectKey keyProperty="id" resultType="String" order="BEFORE">
+            select uuid()
+        </selectKey>
+        insert into T_MANAGE_APPLICATION ( ID
+        , ICON
+        , NAME
+        , LOGOUT_URL
+        , UPDATED
+        , IS_CAN_MODIFY
+        , CIPHER_KEY
+        , MD5_KEY
+        , REMARK
+        , OPERATOR
+        , CREATED
+        , URL
+        )values(#{id,jdbcType=VARCHAR}
+        , #{icon,jdbcType=VARCHAR}
+        , #{name,jdbcType=VARCHAR}
+        , #{logoutUrl,jdbcType=VARCHAR}
+        , #{updated,jdbcType=TIMESTAMP}
+        , #{isCanModify,jdbcType=VARCHAR}
+        , #{cipherKey,jdbcType=VARCHAR}
+        , #{md5Key,jdbcType=VARCHAR}
+        , #{remark,jdbcType=VARCHAR}
+        , #{operator,jdbcType=VARCHAR}
+        , #{created,jdbcType=TIMESTAMP}
+        , #{url,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <!--更新记录-->
+    <update id="update" parameterType="com.platform.admin.domain.Application">
+        update T_MANAGE_APPLICATION set ICON=#{icon,jdbcType=VARCHAR}
+        , NAME=#{name,jdbcType=VARCHAR}
+        , LOGOUT_URL=#{logoutUrl,jdbcType=VARCHAR}
+        , UPDATED=#{updated,jdbcType=TIMESTAMP}
+        , IS_CAN_MODIFY=#{isCanModify,jdbcType=VARCHAR}
+        , CIPHER_KEY=#{cipherKey,jdbcType=VARCHAR}
+        , MD5_KEY=#{md5Key,jdbcType=VARCHAR}
+        , REMARK=#{remark,jdbcType=VARCHAR}
+        , OPERATOR=#{operator,jdbcType=VARCHAR}
+        , URL=#{url,jdbcType=VARCHAR}
+        where ID=#{id,jdbcType=VARCHAR}
+    </update>
+
+    <!--查询单条记录-->
+    <select id="get" resultMap="BaseResultMap" parameterType="com.platform.admin.domain.Application">
+        select ICON
+        , NAME
+        , LOGOUT_URL
+        , UPDATED
+        , IS_CAN_MODIFY
+        , CIPHER_KEY
+        , MD5_KEY
+        , ID
+        , REMARK
+        , OPERATOR
+        , CREATED
+        , URL
+        from T_MANAGE_APPLICATION where ID=#{id,jdbcType=VARCHAR}
+    </select>
+
+    <!--查询记录-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select ICON
+        , NAME
+        , LOGOUT_URL
+        , UPDATED
+        , IS_CAN_MODIFY
+        , CIPHER_KEY
+        , MD5_KEY
+        , ID
+        , REMARK
+        , OPERATOR
+        , CREATED
+        , URL
+        from T_MANAGE_APPLICATION
+        order BY CREATED
+    </select>
+
+
+    <!--按角色查询授权的应用列表-->
+    <select id="queryAllWithRoleId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select ICON
+        , NAME
+        , LOGOUT_URL
+        , UPDATED
+        , IS_CAN_MODIFY
+        , CIPHER_KEY
+        , MD5_KEY
+        , ID
+        , REMARK
+        , OPERATOR
+        , CREATED
+        , URL
+        from T_MANAGE_APPLICATION
+        where ID IN(select APP_ID from t_manage_resource where ID IN(
+        select RESOURCE_ID from t_manage_role_resource where ROLE_ID IN(#{roleId,jdbcType=VARCHAR})))
+       order BY CREATED
+    </select>
+
+    <!--查询记录-->
+    <select id="query" resultMap="BaseResultMap" parameterType="com.platform.admin.domain.Application">
+        select ICON
+        , NAME
+        , LOGOUT_URL
+        , UPDATED
+        , IS_CAN_MODIFY
+        , CIPHER_KEY
+        , MD5_KEY
+        , ID
+        , REMARK
+        , OPERATOR
+        , CREATED
+        , URL
+        from T_MANAGE_APPLICATION
+        <where>
+            <if test="icon!= null and icon!= ''">
+                <![CDATA[   and ICON = #{icon,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="name!= null and name!= ''">
+                <![CDATA[   and NAME = #{name,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="logoutUrl!= null and logoutUrl!= ''">
+                <![CDATA[   and LOGOUT_URL = #{logoutUrl,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="updated!= null and updated!= ''">
+                <![CDATA[   and UPDATED = #{updated,jdbcType=TIMESTAMP}]]>
+            </if>
+            <if test="isCanModify!= null and isCanModify!= ''">
+                <![CDATA[   and IS_CAN_MODIFY = #{isCanModify,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="cipherKey!= null and cipherKey!= ''">
+                <![CDATA[   and CIPHER_KEY = #{cipherKey,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="md5Key!= null and md5Key!= ''">
+                <![CDATA[   and MD5_KEY = #{md5Key,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="id!= null and id!= ''">
+                <![CDATA[   and ID = #{id,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="remark!= null and remark!= ''">
+                <![CDATA[   and REMARK = #{remark,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="operator!= null and operator!= ''">
+                <![CDATA[   and OPERATOR = #{operator,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="created!= null and created!= ''">
+                <![CDATA[   and CREATED = #{created,jdbcType=TIMESTAMP}]]>
+            </if>
+            <if test="url!= null and url!= ''">
+                <![CDATA[   and URL = #{url,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="userId!= null and userId!= ''">
+                <![CDATA[
+                  id IN ( SELECT APP_ID from T_MANAGE_RESOURCE WHERE id
+	          IN(select resource_id from t_manage_role_resource where role_id
+		      IN(select role_id from t_manage_user_role where user_id= #{userId,jdbcType=VARCHAR}
+		      )
+            )
+          )
+               ]]>
+            </if>
+
+        </where>
+        order BY CREATED
+        limit #{start},#{limit}
+    </select>
+</mapper>

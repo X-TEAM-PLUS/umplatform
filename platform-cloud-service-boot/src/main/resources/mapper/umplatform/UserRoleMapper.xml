@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.platform.admin.dao.UserRoleDao">
+    <resultMap id="BaseResultMap" type="com.platform.admin.domain.UserRole">
+        <id column="ID" property="id" jdbcType="VARCHAR"/>
+        <result column="USER_ID" property="userId" jdbcType="VARCHAR"/>
+        <result column="UPDATED" property="updated" jdbcType="TIMESTAMP"/>
+        <result column="OPERATOR" property="operator" jdbcType="VARCHAR"/>
+        <result column="CREATED" property="created" jdbcType="TIMESTAMP"/>
+        <result column="ROLE_ID" property="roleId" jdbcType="VARCHAR"/>
+
+    </resultMap>
+    <!--删除记录-->
+    <delete id="delete" parameterType="com.platform.admin.domain.UserRole">
+        delete from T_MANAGE_USER_ROLE where ID=#{id,jdbcType=VARCHAR}
+    </delete>
+
+    <delete id="deleteWithUserId" parameterType="java.lang.String" >
+        delete from T_MANAGE_USER_ROLE where USER_ID=#{userId,jdbcType=VARCHAR}
+    </delete>
+    <!--插入记录-->
+    <insert id="insert" parameterType="com.platform.admin.domain.UserRole">
+        <selectKey keyProperty="id" resultType="String" order="BEFORE">
+            select uuid()
+        </selectKey>
+        insert into T_MANAGE_USER_ROLE ( ID
+        , USER_ID
+        , UPDATED
+        , OPERATOR
+        , CREATED
+        , ROLE_ID
+        )values(#{id,jdbcType=VARCHAR}
+        , #{userId,jdbcType=VARCHAR}
+        , #{updated,jdbcType=TIMESTAMP}
+        , #{operator,jdbcType=VARCHAR}
+        , #{created,jdbcType=TIMESTAMP}
+        , #{roleId,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <!--更新记录-->
+    <update id="update" parameterType="com.platform.admin.domain.UserRole">
+        update T_MANAGE_USER_ROLE set USER_ID=#{userId,jdbcType=VARCHAR}
+        , UPDATED=#{updated,jdbcType=TIMESTAMP}
+        , OPERATOR=#{operator,jdbcType=VARCHAR}
+        , CREATED=#{created,jdbcType=TIMESTAMP}
+        , ROLE_ID=#{roleId,jdbcType=VARCHAR}
+        where ID=#{id,jdbcType=VARCHAR}
+    </update>
+
+    <!--查询单条记录-->
+    <select id="get" resultMap="BaseResultMap" parameterType="com.platform.admin.domain.UserRole">
+        select USER_ID
+        , UPDATED
+        , ID
+        , OPERATOR
+        , CREATED
+        , ROLE_ID
+        from T_MANAGE_USER_ROLE where ID=#{id,jdbcType=VARCHAR}
+    </select>
+
+    <!--查询记录-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select USER_ID
+        , UPDATED
+        , ID
+        , OPERATOR
+        , CREATED
+        , ROLE_ID
+        from T_MANAGE_USER_ROLE
+    </select>
+
+    <!--查询记录-->
+    <select id="query" resultMap="BaseResultMap" parameterType="com.platform.admin.domain.UserRole">
+        select USER_ID
+        , UPDATED
+        , ID
+        , OPERATOR
+        , CREATED
+        , ROLE_ID
+        from T_MANAGE_USER_ROLE
+        <where>
+            <if test="userId!= null and userId!= ''">
+                <![CDATA[   and USER_ID = #{userId,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="updated!= null and updated!= ''">
+                <![CDATA[   and UPDATED = #{updated,jdbcType=TIMESTAMP}]]>
+            </if>
+            <if test="id!= null and id!= ''">
+                <![CDATA[   and ID = #{id,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="operator!= null and operator!= ''">
+                <![CDATA[   and OPERATOR = #{operator,jdbcType=VARCHAR}]]>
+            </if>
+            <if test="created!= null and created!= ''">
+                <![CDATA[   and CREATED = #{created,jdbcType=TIMESTAMP}]]>
+            </if>
+            <if test="roleId!= null and roleId!= ''">
+                <![CDATA[   and ROLE_ID = #{roleId,jdbcType=VARCHAR}]]>
+            </if>
+        </where>
+    </select>
+</mapper>

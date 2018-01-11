@@ -3,10 +3,11 @@
     <!-- BEGIN HEADER INNER -->
     <div class="page-header-inner">
         <!-- BEGIN LOGO -->
-        <div class="page-logo">
-            <a href="/index" target="_top" class="logo-default">
-                     <span style="font-size: large"><li class="fa fa-desktop  font-red fa-1x"></li>统一管理平台</span>
-            </a>
+        <div class="page-logo ">
+            <%--<a href="/index" target="_top" class="logo-default font-white">--%>
+            <%--<img src="/resources/assets/admin/layout/img/logo.png" alt="logo"/>--%>
+            <%--li class="fa fa-desktop  font-red "></li>--%><span  class="logo-default font-white " style="font-size: 22px;position:absolute;top:-10px;"><i class="glyphicon glyphicon-th font-red"></i> <strong>统一管理平台</strong></span>
+            <%--</a>--%>
             <div class="menu-toggler sidebar-toggler">
             </div>
         </div>

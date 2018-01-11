@@ -7,7 +7,7 @@
 <!-- BEGIN HEAD -->
 <head>
     <meta charset="utf-8"/>
-    <title>统一后台管理</title>
+    <title>火星计划-后台管理</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
@@ -48,7 +48,7 @@
 <!-- END SIDEBAR TOGGLER BUTTON -->
 <!-- BEGIN LOGO -->
 <div class="logo logo-lg ">
-    <H1 class="text-primary"><b>统一管理平台</b></H1>
+    <H1 class="text-primary"><b>火星计划-后台管理</b></H1>
 </div>
 <!-- END LOGO -->
 <!-- BEGIN LOGIN -->
@@ -105,7 +105,7 @@
     <!-- END LOGIN FORM -->
 </div>
 <div class="copyright">
-    <strong>Copyright &copy; 2016-2020 金联储.</strong> All rights reserved.
+    <strong>Copyright &copy; 2016-2020 X-Team-Plus.</strong> All rights reserved.
 </div>
 <!-- END LOGIN -->
 <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->

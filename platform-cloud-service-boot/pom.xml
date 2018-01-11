@@ -141,7 +141,7 @@
             <id>test</id>
             <properties>
                 <!-- euerka注册中心地址-->
-                <mvn.spring.cloud.euerka.server>http://192.168.31.212:8888/eureka/</mvn.spring.cloud.euerka.server>
+                <mvn.spring.cloud.euerka.server>http://113.209.111.211:8888/eureka/</mvn.spring.cloud.euerka.server>
                 <!--数据库连接-->
                 <mvn.jdbc.url>
                     <![CDATA[jdbc:mysql://113.209.111.211:3306/umplatform?useUnicode=true&characterEncoding=utf-8]]></mvn.jdbc.url>

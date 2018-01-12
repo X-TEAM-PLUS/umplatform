@@ -54,14 +54,16 @@ public class RedisCacheSessionServiceImpl {
 
 
     @RequestMapping("/writeBackUrl")
-    public void writeBackUrl(@RequestParam String sessionId, @RequestParam String backUrl, @RequestParam String desKey) {
+    public void writeBackUrl(@RequestParam("sessionId") String sessionId,
+                             @RequestParam("backUrl") String backUrl,
+                             @RequestParam("desKey")  String desKey) {
         redisTemplate.opsForValue().set(sessionId + BACKURL, backUrl);
         redisTemplate.expire(sessionId + BACKURL, TIMEOUT, TimeUnit.MILLISECONDS);
     }
 
 
     @RequestMapping("/readBackUrl")
-    public String readBackUrl(@RequestParam String sessionId, @RequestParam String desKey) {
+    public String readBackUrl(@RequestParam("sessionId") String sessionId, @RequestParam("desKey")  String desKey) {
         String temp = (String) redisTemplate.opsForValue().get(sessionId + BACKURL);
         if (StringUtils.isEmpty(temp)) {
             return null;
@@ -71,7 +73,9 @@ public class RedisCacheSessionServiceImpl {
 
 
     @RequestMapping("/writeRandCode")
-    public void writeRandCode(@RequestParam String sessionId, @RequestParam String randCode, @RequestParam String desKey) {
+    public void writeRandCode(@RequestParam("sessionId") String sessionId,
+                              @RequestParam("randCode") String randCode,
+                              @RequestParam("desKey") String desKey) {
 
         redisTemplate.opsForValue().set(sessionId + RAND_CODE, randCode);
         redisTemplate.expire(sessionId + RAND_CODE, TIMEOUT, TimeUnit.MILLISECONDS);
@@ -79,7 +83,7 @@ public class RedisCacheSessionServiceImpl {
 
 
     @RequestMapping("/readRandCode")
-    public String readRandCode(@RequestParam String sessionId, @RequestParam String desKey) {
+    public String readRandCode(@RequestParam("sessionId") String sessionId, @RequestParam("desKey") String desKey) {
         String temp = (String) redisTemplate.opsForValue().get(sessionId + RAND_CODE);
         if (StringUtils.isEmpty(temp)) {
             return null;
@@ -89,20 +93,20 @@ public class RedisCacheSessionServiceImpl {
 
 
     @RequestMapping("/deleteBackUrl")
-    public void deleteBackUrl(@RequestParam String sessionId, @RequestParam String desKey) {
+    public void deleteBackUrl(@RequestParam("sessionId") String sessionId, @RequestParam("desKey") String desKey) {
         redisTemplate.delete(sessionId + BACKURL);
     }
 
 
     @RequestMapping("/deleteRanCode")
-    public void deleteRanCode(@RequestParam String sessionId, @RequestParam String desKey) {
+    public void deleteRanCode(@RequestParam("sessionId") String sessionId, @RequestParam("desKey") String desKey) {
         redisTemplate.delete(sessionId + RAND_CODE);
 
     }
 
 
     @RequestMapping("/deleteSession")
-    public void deleteSession(@RequestParam String sessionId, @RequestParam String desKey) {
+    public void deleteSession(@RequestParam("sessionId") String sessionId, @RequestParam("desKey")  String desKey) {
         redisTemplate.delete(getSessionKey(sessionId, desKey));
     }
 

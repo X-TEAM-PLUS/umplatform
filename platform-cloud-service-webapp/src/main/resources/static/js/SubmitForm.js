@@ -22,8 +22,8 @@
                             , onOk: function () {
                                 if (!result || !result.backUrl) {
                                     if(action.indexOf("editPwd")>=0||action.indexOf("editBasicInfo")>=0){
-                                        if($.cookie('backUrl')!=null){
-                                            window.location.href = $.cookie('backUrl');
+                                        if(result.backUrl!=null){
+                                            window.location.href = 'index?backUrl='+$.cookie('backUrl');
                                         }else {
                                             window.location.href = 'index';
                                         }
@@ -31,7 +31,7 @@
                                         window.location.href = 'index';
                                     }
                                 } else {
-                                    window.location.href = result.backUrl;
+                                    window.location.href = 'index?backUrl='+result.backUrl;
                                 }
                             }
                         });

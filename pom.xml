@@ -13,6 +13,7 @@
         <module>platform-cloud-service-common</module>
         <module>platform-cloud-service-boot</module>
         <module>platform-cloud-service-webapp</module>
+        <module>platform-cloud-security</module>
 
     </modules>
 

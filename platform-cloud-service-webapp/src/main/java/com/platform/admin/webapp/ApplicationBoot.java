@@ -5,8 +5,10 @@ import org.apache.log4j.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
@@ -14,6 +16,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  */
 @EnableDiscoveryClient // Eureka Discovery Client 标识
 @EnableFeignClients(basePackages = {"com.platform.admin.api"})
+@ServletComponentScan("com.platform.admin.security")
 @SpringBootApplication(scanBasePackages = {"com.platform.admin"}) // Spring Boot 应用标识
 public class ApplicationBoot {
 

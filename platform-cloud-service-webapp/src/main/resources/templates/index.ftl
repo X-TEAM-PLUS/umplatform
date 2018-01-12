@@ -33,7 +33,7 @@
     <!-- BEGIN CONTENT -->
     <div class="page-content-wrapper">
                 <div  class="page-content">
-                     <iframe  name="mainWindow"  id="mainWindow"  width="100%"  src="/welcome" height="100%" frameborder="0"  scrolling="no"  marginwidth="0" marginheight="0" border="0"   onload="this.height=document.body.scrollHeight-100;setBackUrl(this);"></iframe>
+                     <iframe  name="mainWindow"  id="mainWindow"  width="100%"  src="/welcome" height="100%" frameborder="0"  scrolling="no"  marginwidth="0" marginheight="0" border="0"   onload="this.height=document.body.scrollHeight-100;"></iframe>
                 </div>
     </div>
     <!-- END CONTENT -->
@@ -99,11 +99,15 @@
 <script>
     jQuery(document).ready(function() {
         Layout.init(); // init layout
+        setBackUrl();
     });
-    function setBackUrl(obj){
-        var backUrl=obj.contentWindow.location.href;
+    function setBackUrl(){
+
+        var backUrl='${backUrl!''}';
         if(backUrl.indexOf("toEditBasicInfo")<=0&&backUrl.indexOf("toEditPsw")<=0) {
-            $.cookie('backUrl', backUrl);
+            if (backUrl != '') {
+                document.getElementById("mainWindow").src = backUrl;
+            }
         }
 
     }

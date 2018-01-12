@@ -41,7 +41,7 @@ public interface SessionService {
      * @param desKey
      */
     @RequestMapping(value = "/platform/redisSessionService/writeBackUrl", method = GET)
-    public void writeBackUrl(@RequestParam("sessionId") String sessionId, @RequestParam("backUrl") String backUrl, String desKey);
+    public void writeBackUrl(@RequestParam("sessionId") String sessionId, @RequestParam("backUrl") String backUrl,@RequestParam("desKey") String desKey);
 
     /**
      * 读取backurl

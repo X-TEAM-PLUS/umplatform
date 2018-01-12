@@ -11,17 +11,21 @@ import com.platform.admin.common.util.VerifyCodeUtils;
 import com.platform.admin.security.Constants;
 import com.platform.admin.security.UserInfo;
 import com.platform.admin.security.config.SecurityConfig;
+import com.platform.admin.webapp.util.UrlUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.*;
 
 //import org.apache.commons.beanutils.PropertyUtilsBean;
@@ -45,8 +49,13 @@ public class IndexController implements Constants {
 
 
     @RequestMapping("/index")
-    public String index() {
-        return "index";
+    public ModelAndView index(HttpServletRequest request, HttpServletResponse response) {
+        ModelAndView modelAndView = new ModelAndView("index");
+        String backUrl = request.getParameter("backUrl");
+        if (!StringUtils.isEmpty(backUrl)) {
+            modelAndView.addObject("backUrl", backUrl);
+        }
+        return modelAndView;
     }
 
     @RequestMapping("/welcome")
@@ -56,27 +65,28 @@ public class IndexController implements Constants {
 
     @RequestMapping("/interceptor")
     @ResponseBody
-    public JsonResult interceptor(HttpServletRequest request, HttpServletResponse response) {
-        JsonResult jsonResult = new JsonResult();
+    public ModelAndView interceptor(HttpServletRequest request, HttpServletResponse response) {
+        ModelAndView modelAndView = new ModelAndView("index");
         try {
-            HashMap map = new HashMap();
+            String desKey = securityConfig.getSecuritKey();
+            String backUrl = request.getParameter("backUrl");
+            if (!StringUtils.isEmpty(backUrl))
+                sessionService.writeBackUrl(request.getSession().getId(), backUrl, desKey);
             UserInfo userInfo = sessionService.readSession(request.getSession().getId(), securityConfig.getSecuritKey());
             if (userInfo != null) {
-                jsonResult.setSuccess(true);
-                map.put("userId", userInfo.getUserId());
-                map.put("ip", request.getLocalAddr());
-                map.put("port", request.getLocalPort());
-                map.put("path", "index");
-                jsonResult.setData(map);
+                backUrl = getBackUrlToken(request, backUrl);
+                if (!StringUtils.isEmpty(backUrl)) {
+                    modelAndView.addObject("backUrl", backUrl);
+                }
+                return new ModelAndView("redirect:" + backUrl);
             } else {
-                jsonResult.setSuccess(false);
-                jsonResult.setMessage("用户没有登陆!");
+                modelAndView = new ModelAndView("login");
+                return modelAndView;
             }
         } catch (Exception e) {
-            jsonResult.setSuccess(false);
-            jsonResult.setMessage("系统异常!");
+            modelAndView = new ModelAndView("login");
+            return modelAndView;
         }
-        return jsonResult;
     }
 
 
@@ -111,7 +121,11 @@ public class IndexController implements Constants {
                             jsonResult.setSuccess(true);
                             jsonResult.setMessage("登录认证成功。");
                             //写backUrl
-                            jsonResult.put(BACK_URL, sessionService.readBackUrl(request.getSession().getId(), desKey));
+                            backUrl = sessionService.readBackUrl(request.getSession().getId(), desKey);
+                            if (backUrl != null && !backUrl.equals("")) {
+                                backUrl = getBackUrlToken(request, backUrl);
+                            }
+                            jsonResult.put(BACK_URL, backUrl);
                             //清除backUrl
                             sessionService.deleteBackUrl(request.getSession().getId(), desKey);
                             //设置登录用户信息
@@ -122,6 +136,7 @@ public class IndexController implements Constants {
                             userInfo.setRoleIds(user.getRoles());
                             userInfo.setOrganizationCode(user.getOrganizationId());
                             userInfo.setAdministrator(user.getIsAdministrator().intValue() == 1 ? true : false);
+                            request.getSession().setAttribute("token", request.getSession().getId());
                             //写入cookie
                             SessionUserVO parm = new SessionUserVO(userInfo, request.getSession().getId(), desKey);
                             sessionService.writeSession(parm);
@@ -158,9 +173,45 @@ public class IndexController implements Constants {
         return jsonResult;
     }
 
+    private String getBackUrlToken(HttpServletRequest request, String backUrl) {
+        try {
+            URL url = new URL(backUrl);
+            String urlStr = url.getPath();
+            Map<String, String> parms = UrlUtil.URLRequest(backUrl);
+            Iterator<String> keys = parms.keySet().iterator();
+            String uriStr = "";
+            int index = 0;
+            while (keys.hasNext()) {
+                String key = keys.next();
+                String value = parms.get(key);
+                if (index == 0) {
+                    uriStr += "?" + key + "=" + value;
+                } else {
+                    uriStr += "&" + key + "=" + value;
+                }
+            }
+            if (index == 0) {
+                uriStr += "?token=" + request.getSession().getId();
+
+            } else {
+                uriStr += "&token=" + request.getSession().getId();
+            }
+            System.out.println("http://" + url.getHost() + ":" + url.getPort() +urlStr+ uriStr);
+            System.out.println(url.getHost());
+            System.out.println(url.getPort());
+            System.out.println(urlStr);
+            System.out.println(uriStr);
+            return "http://" + url.getHost() + ":" + url.getPort() +urlStr+ uriStr;
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
     @RequestMapping("/logout")
     public String logout(HttpServletRequest request, HttpServletResponse response) {
+        request.getSession().removeAttribute("token");
         String desKey = securityConfig.getSecuritKey();
         //清除用户cookie
         sessionService.deleteSession(request.getSession().getId(), desKey);

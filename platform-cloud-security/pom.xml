@@ -53,7 +53,7 @@
         <profile>
             <id>test</id>
             <properties>
-                <session.not.jump.path>www.admin.mars.com</session.not.jump.path>
+                <session.not.jump.path>113.209.111.211</session.not.jump.path>
                 <session.not.jump.port>8210</session.not.jump.port>
             </properties>
         </profile>

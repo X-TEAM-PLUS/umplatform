@@ -31,9 +31,9 @@ spring:
     serialization: true
     default-property-inclusion: non_null
   redis:
-    host: 127.0.0.1
+    host: @redis.ip@
     database: 0
-    port: 6379
+    port: @redis.port@
     pool:
       max-active: 8
       max-wait: -1

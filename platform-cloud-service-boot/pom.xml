@@ -135,8 +135,8 @@
                 <!--日志输出目录-->
                 <mvn.log.path>d:/logs</mvn.log.path>
                 <mvn.log.level>DEBUG</mvn.log.level>
-                <redis.ip>127.0.0.1</redis.ip>
-                <redis.port>6379</redis.port>
+                <mvn.redis.ip>127.0.0.1</mvn.redis.ip>
+                <mvn.redis.port>6379</mvn.redis.port>
             </properties>
         </profile>
         <profile>
@@ -152,8 +152,8 @@
                 <!--日志输出目录-->
                 <mvn.log.path>/var/log/bestlease</mvn.log.path>
                 <mvn.log.level>DEBUG</mvn.log.level>
-                <redis.ip>127.0.0.1</redis.ip>
-                <redis.port>6379</redis.port>
+                <mvn.redis.ip>127.0.0.1</mvn.redis.ip>
+                <mvn.redis.port>6379</mvn.redis.port>
             </properties>
         </profile>
         <profile>
@@ -171,8 +171,8 @@
                 <!--日志输出目录-->
                 <mvn.log.path>/data/logs/bestlease</mvn.log.path>
                 <mvn.log.level>INFO</mvn.log.level>
-                <redis.ip>127.0.0.1</redis.ip>
-                <redis.port>6379</redis.port>
+                <mvn.redis.ip>127.0.0.1</mvn.redis.ip>
+                <mvn.redis.port>6379</mvn.redis.port>
             </properties>
         </profile>
     </profiles>

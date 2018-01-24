@@ -46,7 +46,7 @@
         <profile>
             <id>develop</id>
             <properties>
-                <session.not.jump.path>www.admin.mars.com</session.not.jump.path>
+                <session.not.jump.path>127.0.0.1</session.not.jump.path>
                 <session.not.jump.port>8210</session.not.jump.port>
             </properties>
         </profile>
@@ -60,7 +60,7 @@
         <profile>
             <id>production</id>
             <properties>
-                <session.not.jump.path>www.admin.mars.com</session.not.jump.path>
+                <session.not.jump.path>admin.mars.com</session.not.jump.path>
                 <session.not.jump.port>8210</session.not.jump.port>
             </properties>
         </profile>

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<%@ page language="java" pageEncoding="UTF-8" %>
-<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-  <%@ include file="../common/head.jsp" %>
+<#import '../common/common.ftl' as commonMacro>
+<@commonMacro.commonStyle />
+<@commonMacro.commonScript />
 </head>
 <body class="page-content">
   <div class="page-bar">
@@ -100,7 +100,6 @@
     </div>
   </div>
 </div>
-  <%@ include file="../common/library.jsp" %>
 </body>
 </html>
 

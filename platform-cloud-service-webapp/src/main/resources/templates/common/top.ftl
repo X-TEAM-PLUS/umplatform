@@ -4,7 +4,7 @@
     <div class="page-header-inner">
         <!-- BEGIN LOGO -->
         <div class="page-logo ">
-            <span  class="logo-default font-white " style="font-size: 22px;position:absolute;top:-10px;"><i class="glyphicon glyphicon-th font-red"></i> <strong>统一管理平台</strong></span>
+            <span  class="logo-default font-white " style="font-size: 22px;position:absolute;top:-10px;"><i class="glyphicon glyphicon-th font-red"></i> <strong>早安云后台</strong></span>
             <div class="menu-toggler sidebar-toggler">
             </div>
         </div>

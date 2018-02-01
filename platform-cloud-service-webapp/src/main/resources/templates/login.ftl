@@ -48,7 +48,7 @@
 <!-- END SIDEBAR TOGGLER BUTTON -->
 <!-- BEGIN LOGO -->
 <div class="logo logo-lg ">
-    <H1 class="text-primary"><b>火星计划-后台管理</b></H1>
+    <H1 class="text-primary"><b>早安云-后台管理</b></H1>
 </div>
 <!-- END LOGO -->
 <!-- BEGIN LOGIN -->

@@ -7,7 +7,7 @@
 <!-- BEGIN HEAD -->
 <head>
     <meta charset="utf-8"/>
-    <title>火星计划-后台管理</title>
+    <title>早安云-管理</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
@@ -48,7 +48,7 @@
 <!-- END SIDEBAR TOGGLER BUTTON -->
 <!-- BEGIN LOGO -->
 <div class="logo logo-lg ">
-    <H1 class="text-primary"><b>火星计划-后台管理</b></H1>
+    <H1 class="text-primary"><b>早安云-后台管理</b></H1>
 </div>
 <!-- END LOGO -->
 <!-- BEGIN LOGIN -->

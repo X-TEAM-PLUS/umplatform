@@ -60,8 +60,8 @@
         <profile>
             <id>production</id>
             <properties>
-                <session.not.jump.path>admin.mars.com</session.not.jump.path>
-                <session.not.jump.port>8210</session.not.jump.port>
+                <session.not.jump.path>47.104.173.125</session.not.jump.path>
+                <session.not.jump.port>80</session.not.jump.port>
             </properties>
         </profile>
     </profiles>

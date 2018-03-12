@@ -30,6 +30,7 @@ public class LoginInterceptor implements Filter {
         ResourceBundle msgBundle = ResourceBundle.getBundle("login_interceptor", Locale.CHINA);
         IP = msgBundle.getString("com.platform.admin.LoginIp");
         String portStr = msgBundle.getString("com.platform.admin.LoginPort");
+        System.out.println("启动拦截器IP地址 [" + IP + "] 端口 [" + portStr + "]");
         if (portStr != null && !portStr.equals(""))
             PORT = Integer.parseInt(portStr);
         String excludedUrl = filterConfig.getInitParameter("EXCLUDED_PAGES");

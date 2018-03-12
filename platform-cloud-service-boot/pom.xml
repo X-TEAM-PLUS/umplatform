@@ -161,13 +161,13 @@
             <properties>
                 <!-- euerka注册中心地址-->
                 <mvn.spring.cloud.euerka.server>
-                    http://cache-01:8888/eureka/,http://cache-02:8888/eureka/,http://cache-03:8888/eureka/
+                    http://172.31.204.15:8888/eureka/
                 </mvn.spring.cloud.euerka.server>
                 <!--数据库连接-->
                 <mvn.jdbc.url>
-                    <![CDATA[jdbc:mysql://172.17.54.136:3306/bestlease?useUnicode=true&characterEncoding=utf-8]]></mvn.jdbc.url>
-                <mvn.jdbc.user>bestlease</mvn.jdbc.user>
-                <mvn.jdbc.pwd>bestlease</mvn.jdbc.pwd>
+                    <![CDATA[jdbc:mysql://127.0.0.1:3306/umplatform?useUnicode=true&characterEncoding=utf-8]]></mvn.jdbc.url>
+                <mvn.jdbc.user>root</mvn.jdbc.user>
+                <mvn.jdbc.pwd>uuZd2xlHeWJorTkC</mvn.jdbc.pwd>
                 <!--日志输出目录-->
                 <mvn.log.path>/data/logs/mars</mvn.log.path>
                 <mvn.log.level>INFO</mvn.log.level>

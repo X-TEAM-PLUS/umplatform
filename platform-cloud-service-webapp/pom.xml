@@ -125,10 +125,7 @@
             <id>production</id>
             <properties>
                 <!-- euerka注册中心地址-->
-                <mvn.spring.cloud.euerka.server>
-                    http://cache-01:8888/eureka/,http://cache-02:8888/eureka/,http://cache-03:8888/eureka/
-                </mvn.spring.cloud.euerka.server>
-
+                <mvn.spring.cloud.euerka.server>http://172.31.204.15:8888/eureka/</mvn.spring.cloud.euerka.server>
             </properties>
         </profile>
     </profiles>

@@ -18,7 +18,7 @@ import java.util.ResourceBundle;
 @WebFilter(filterName = "loginAdminFilter", urlPatterns = "/*", initParams = {@WebInitParam(name = "EXCLUDED_PAGES", value = "/login,/interceptor,/imageCode,/authenticate")})
 public class LoginInterceptor implements Filter {
 
-    private static String IP = "127.0.0.1";
+    private static String IP = "";
 
     private static int PORT = 8120;
 
@@ -64,12 +64,14 @@ public class LoginInterceptor implements Filter {
         }
         // 未登录
         if (request.getSession().getAttribute("token") == null) {
-            String backUrl = request.getRequestURL().toString();
+            String backUrl = "http://" + IP + ":" + PORT + request.getServletPath();
             String queryString = request.getQueryString();
             if (!StringUtils.isEmpty(queryString)) {
-                backUrl += "?" + queryString;
+                backUrl += "http://" + IP + ":" + PORT + "?" + queryString;
             }
-            response.sendRedirect("http://" + IP + ":" + PORT + "/interceptor?backUrl=" + URLEncoder.encode(backUrl, "UTF-8"));
+            String redirectUrl = "http://" + IP + ":" + PORT + "/interceptor?backUrl=" + URLEncoder.encode(backUrl, "UTF-8");
+            System.out.println("重定向地址为 : " + redirectUrl);
+            response.sendRedirect(redirectUrl);
         } else {
             filterChain.doFilter(servletRequest, servletResponse);
             return;

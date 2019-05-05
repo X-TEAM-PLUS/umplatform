@@ -78,6 +78,6 @@ public interface AreaService {
      * @param area
      * @return
      */
-    @RequestMapping(value = "/platform/areaService/geTree", method = GET)
+    @RequestMapping(value = "/platform/areaService/getTree", method = GET)
     List<ExtTreeNode> getTree(final AreaVO area);
 }

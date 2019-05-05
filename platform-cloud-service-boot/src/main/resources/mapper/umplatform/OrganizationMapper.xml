@@ -14,7 +14,7 @@
     </resultMap>
     <!--删除记录-->
     <delete id="delete" parameterType="com.platform.admin.domain.Organization">
-        delete from T_MANAGE_ORGANIZATION where ID=#{id,jdbcType=VARCHAR}
+        delete from t_manage_organization where ID=#{id,jdbcType=VARCHAR}
     </delete>
 
     <!--插入记录-->
@@ -22,7 +22,7 @@
         <selectKey keyProperty="id" resultType="String" order="BEFORE">
             select uuid()
         </selectKey>
-        insert into T_MANAGE_ORGANIZATION ( ID
+        insert into t_manage_organization ( ID
         , NAME
         , UPDATED
         , REMARK
@@ -43,7 +43,7 @@
 
     <!--更新记录-->
     <update id="update" parameterType="com.platform.admin.domain.Organization">
-        update T_MANAGE_ORGANIZATION set NAME=#{name,jdbcType=VARCHAR}
+        update t_manage_organization set NAME=#{name,jdbcType=VARCHAR}
         , UPDATED=#{updated,jdbcType=TIMESTAMP}
         , REMARK=#{remark,jdbcType=VARCHAR}
         , OPERATOR=#{operator,jdbcType=VARCHAR}
@@ -62,7 +62,7 @@
         , CREATED
         , PARENT_ID
         , CODE
-        from T_MANAGE_ORGANIZATION where ID=#{id,jdbcType=VARCHAR}
+        from t_manage_organization where ID=#{id,jdbcType=VARCHAR}
     </select>
 
     <!--查询记录-->
@@ -75,7 +75,7 @@
         , CREATED
         , PARENT_ID
         , CODE
-        from T_MANAGE_ORGANIZATION
+        from t_manage_organization
         order BY CREATED
     </select>
 
@@ -89,7 +89,7 @@
         , CREATED
         , PARENT_ID
         , CODE
-        from T_MANAGE_ORGANIZATION
+        from t_manage_organization
         <where>
             <if test="name!= null and name!= ''">
                 <![CDATA[   and NAME = #{name,jdbcType=VARCHAR}]]>
@@ -128,7 +128,7 @@
         , CREATED
         , PARENT_ID
         , CODE
-        from T_MANAGE_ORGANIZATION
+        from t_manage_organization
         <where>
                 <![CDATA[   and PARENT_ID = '']]>
         </where>

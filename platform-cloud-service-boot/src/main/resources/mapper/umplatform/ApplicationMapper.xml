@@ -18,7 +18,7 @@
     </resultMap>
     <!--删除记录-->
     <delete id="delete" parameterType="com.platform.admin.domain.Application">
-        delete from T_MANAGE_APPLICATION where ID=#{id,jdbcType=VARCHAR}
+        delete from t_manage_application where ID=#{id,jdbcType=VARCHAR}
     </delete>
 
     <!--插入记录-->
@@ -26,7 +26,7 @@
         <selectKey keyProperty="id" resultType="String" order="BEFORE">
             select uuid()
         </selectKey>
-        insert into T_MANAGE_APPLICATION ( ID
+        insert into t_manage_application ( ID
         , ICON
         , NAME
         , LOGOUT_URL
@@ -55,7 +55,7 @@
 
     <!--更新记录-->
     <update id="update" parameterType="com.platform.admin.domain.Application">
-        update T_MANAGE_APPLICATION set ICON=#{icon,jdbcType=VARCHAR}
+        update t_manage_application set ICON=#{icon,jdbcType=VARCHAR}
         , NAME=#{name,jdbcType=VARCHAR}
         , LOGOUT_URL=#{logoutUrl,jdbcType=VARCHAR}
         , UPDATED=#{updated,jdbcType=TIMESTAMP}
@@ -82,7 +82,7 @@
         , OPERATOR
         , CREATED
         , URL
-        from T_MANAGE_APPLICATION where ID=#{id,jdbcType=VARCHAR}
+        from t_manage_application where ID=#{id,jdbcType=VARCHAR}
     </select>
 
     <!--查询记录-->
@@ -99,7 +99,7 @@
         , OPERATOR
         , CREATED
         , URL
-        from T_MANAGE_APPLICATION
+        from t_manage_application
         order BY CREATED
     </select>
 
@@ -118,7 +118,7 @@
         , OPERATOR
         , CREATED
         , URL
-        from T_MANAGE_APPLICATION
+        from t_manage_application
         where ID IN(select APP_ID from t_manage_resource where ID IN(
         select RESOURCE_ID from t_manage_role_resource where ROLE_ID IN(#{roleId,jdbcType=VARCHAR})))
        order BY CREATED
@@ -138,7 +138,7 @@
         , OPERATOR
         , CREATED
         , URL
-        from T_MANAGE_APPLICATION
+        from t_manage_application
         <where>
             <if test="icon!= null and icon!= ''">
                 <![CDATA[   and ICON = #{icon,jdbcType=VARCHAR}]]>

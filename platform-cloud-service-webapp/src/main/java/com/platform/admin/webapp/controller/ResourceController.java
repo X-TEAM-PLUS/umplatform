@@ -3,8 +3,10 @@ package com.platform.admin.webapp.controller;
 import com.platform.admin.api.ResourceService;
 import com.platform.admin.api.ResourceType;
 import com.platform.admin.api.SessionService;
+import com.platform.admin.api.UserService;
 import com.platform.admin.api.vo.ResourceVO;
 import com.platform.admin.api.vo.TreeInfoVO;
+import com.platform.admin.api.vo.UserVO;
 import com.platform.admin.api.vo.tree.ExtTreeNode;
 import com.platform.admin.common.result.JsonResult;
 import com.platform.admin.common.security.DesUtils;
@@ -46,6 +48,9 @@ public class ResourceController implements Constants {
 
     @javax.annotation.Resource
     private SessionService sessionService;
+
+    @javax.annotation.Resource
+    private UserService userService;
 
     @RequestMapping(value = "/index")
     public String index() {
@@ -278,6 +283,25 @@ public class ResourceController implements Constants {
         treeInfoVO.setAppId(appId);
         treeInfoVO.setResourceType(Integer.parseInt(ResourceType.Menu.getType()));
         treeInfoVO.setAdministrator(userInfo.isAdministrator());
+        return resourceServiceImpl.getTree(treeInfoVO);
+    }
+
+    /**
+     * 获取菜单树
+     *
+     * @return
+     */
+    @RequestMapping("/getTreeUserId")
+    @ResponseBody
+    public List<ExtTreeNode> getTreeByUser(HttpServletRequest request, String appId, String userId) throws Exception {
+        //获取登录用户信息
+        UserVO userInfo = userService.get(new UserVO(userId));
+        TreeInfoVO treeInfoVO = new TreeInfoVO();
+        treeInfoVO.setContextPath(request.getContextPath());
+        treeInfoVO.setUserId(userInfo.getId());
+        treeInfoVO.setAppId(appId);
+        treeInfoVO.setResourceType(Integer.parseInt(ResourceType.Menu.getType()));
+        treeInfoVO.setAdministrator(userInfo.getIsAdministrator()==1);
         return resourceServiceImpl.getTree(treeInfoVO);
     }
 

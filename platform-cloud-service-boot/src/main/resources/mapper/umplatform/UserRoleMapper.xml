@@ -12,18 +12,18 @@
     </resultMap>
     <!--删除记录-->
     <delete id="delete" parameterType="com.platform.admin.domain.UserRole">
-        delete from T_MANAGE_USER_ROLE where ID=#{id,jdbcType=VARCHAR}
+        delete from t_manage_user_role where ID=#{id,jdbcType=VARCHAR}
     </delete>
 
     <delete id="deleteWithUserId" parameterType="java.lang.String" >
-        delete from T_MANAGE_USER_ROLE where USER_ID=#{userId,jdbcType=VARCHAR}
+        delete from t_manage_user_role where USER_ID=#{userId,jdbcType=VARCHAR}
     </delete>
     <!--插入记录-->
     <insert id="insert" parameterType="com.platform.admin.domain.UserRole">
         <selectKey keyProperty="id" resultType="String" order="BEFORE">
             select uuid()
         </selectKey>
-        insert into T_MANAGE_USER_ROLE ( ID
+        insert into t_manage_user_role ( ID
         , USER_ID
         , UPDATED
         , OPERATOR
@@ -40,7 +40,7 @@
 
     <!--更新记录-->
     <update id="update" parameterType="com.platform.admin.domain.UserRole">
-        update T_MANAGE_USER_ROLE set USER_ID=#{userId,jdbcType=VARCHAR}
+        update t_manage_user_role set USER_ID=#{userId,jdbcType=VARCHAR}
         , UPDATED=#{updated,jdbcType=TIMESTAMP}
         , OPERATOR=#{operator,jdbcType=VARCHAR}
         , CREATED=#{created,jdbcType=TIMESTAMP}
@@ -56,7 +56,7 @@
         , OPERATOR
         , CREATED
         , ROLE_ID
-        from T_MANAGE_USER_ROLE where ID=#{id,jdbcType=VARCHAR}
+        from t_manage_user_role where ID=#{id,jdbcType=VARCHAR}
     </select>
 
     <!--查询记录-->
@@ -67,7 +67,7 @@
         , OPERATOR
         , CREATED
         , ROLE_ID
-        from T_MANAGE_USER_ROLE
+        from t_manage_user_role
     </select>
 
     <!--查询记录-->
@@ -78,7 +78,7 @@
         , OPERATOR
         , CREATED
         , ROLE_ID
-        from T_MANAGE_USER_ROLE
+        from t_manage_user_role
         <where>
             <if test="userId!= null and userId!= ''">
                 <![CDATA[   and USER_ID = #{userId,jdbcType=VARCHAR}]]>

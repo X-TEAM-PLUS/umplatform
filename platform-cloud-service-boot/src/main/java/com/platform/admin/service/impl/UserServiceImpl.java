@@ -49,6 +49,9 @@ public class UserServiceImpl extends AbstractServiceProvider {
     @RequestMapping("/get")
     public UserVO get(@RequestBody UserVO userVO) throws Exception {
         User userRow = userDao.get(myUserConvertService.toPO(userVO));
+        if (userRow==null){
+            return null;
+        }
         if (userRow != null) {
             userRow.setEnterPwd(userRow.getPassword());
             StringBuilder selectRoldes = new StringBuilder();

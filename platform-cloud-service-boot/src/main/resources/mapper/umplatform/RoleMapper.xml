@@ -14,7 +14,7 @@
     </resultMap>
     <!--删除记录-->
     <delete id="delete" parameterType="com.platform.admin.domain.Role">
-        delete from T_MANAGE_ROLE where ID=#{id,jdbcType=VARCHAR}
+        delete from t_manage_role where ID=#{id,jdbcType=VARCHAR}
     </delete>
 
     <!--插入记录-->
@@ -22,7 +22,7 @@
         <selectKey keyProperty="id" resultType="String" order="BEFORE">
             select uuid()
         </selectKey>
-        insert into T_MANAGE_ROLE ( ID
+        insert into t_manage_role ( ID
         , ICON
         , UPDATED
         , REMARK
@@ -43,7 +43,7 @@
 
     <!--更新记录-->
     <update id="update" parameterType="com.platform.admin.domain.Role">
-    update  T_MANAGE_ROLE set ICON=#{icon,jdbcType=VARCHAR}
+    update  t_manage_role set ICON=#{icon,jdbcType=VARCHAR}
  , UPDATED=#{updated,jdbcType=TIMESTAMP}
  , REMARK=#{remark,jdbcType=VARCHAR}
  , OPERATOR=#{operator,jdbcType=VARCHAR}
@@ -62,7 +62,7 @@
         , ROLE_NAME
         , CREATED
         , ORGANIZATION_ID
-        from T_MANAGE_ROLE where ID=#{id,jdbcType=VARCHAR}
+        from t_manage_role where ID=#{id,jdbcType=VARCHAR}
     </select>
 
     <!--查询记录-->
@@ -75,7 +75,7 @@
         , ROLE_NAME
         , CREATED
         , ORGANIZATION_ID
-        from T_MANAGE_ROLE
+        from t_manage_role
     </select>
 
     <!--查询记录-->
@@ -88,7 +88,7 @@
         , ROLE_NAME
         , CREATED
         , ORGANIZATION_ID
-        from T_MANAGE_ROLE
+        from t_manage_role
         <where>
             <if test="icon!= null and icon!= ''">
                 <![CDATA[   and ICON = #{icon,jdbcType=VARCHAR}]]>
@@ -122,7 +122,7 @@
 
     <!--查询记录数-->
     <select id="queryCount"   resultType="long"   parameterType="com.platform.admin.domain.Role">
-        select count(1) from T_MANAGE_ROLE
+        select count(1) from t_manage_role
         <where>
             <if test="created!=null and created!=''">
                 <![CDATA[ and CREATED=#{created,jdbcType=TIMESTAMP}]]>

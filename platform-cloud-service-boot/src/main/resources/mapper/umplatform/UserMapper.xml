@@ -25,7 +25,7 @@
     </resultMap>
     <!--删除记录-->
     <delete id="delete" parameterType="com.platform.admin.domain.User">
-        delete from T_MANAGE_USER where ID=#{id,jdbcType=VARCHAR}
+        delete from t_manage_user where ID=#{id,jdbcType=VARCHAR}
     </delete>
 
     <!--插入记录-->
@@ -33,7 +33,7 @@
         <selectKey keyProperty="id" order="BEFORE" resultType="String">
             select uuid()
         </selectKey>
-        insert into T_MANAGE_USER (ID,IS_ADMINISTRATOR
+        insert into t_manage_user (ID,IS_ADMINISTRATOR
         , LOGIN_COUNT
         , AREA_CODE
         , LAST_LOGIN_TIME
@@ -77,7 +77,7 @@
 
     <!--更新记录-->
     <update id="update" parameterType="com.platform.admin.domain.User">
-        update T_MANAGE_USER set
+        update t_manage_user set
          LOGIN_COUNT=#{loginCount,jdbcType=INTEGER}
         , AREA_CODE=#{areaCode,jdbcType=VARCHAR}
         ,LAST_LOGIN_TIME=#{lastLoginTime,jdbcType=TIMESTAMP}
@@ -99,7 +99,7 @@
 
     <!--更新记录-->
     <update id="lock" parameterType="com.platform.admin.domain.User">
-        update T_MANAGE_USER set
+        update t_manage_user set
          LOCKED=#{locked,jdbcType=VARCHAR}
           , UPDATED=#{updated,jdbcType=TIMESTAMP}
         where ID=#{id,jdbcType=VARCHAR} AND IS_ADMINISTRATOR=0
@@ -127,7 +127,7 @@
         , STR_KEY
         , PASSWORD
         ,ORGANIZATION_ID
-        from T_MANAGE_USER
+        from t_manage_user
         <where>
             <if test="id!= null and id!= ''">
                 <![CDATA[   and ID = #{id,jdbcType=VARCHAR}]]>
@@ -160,7 +160,7 @@
         , STR_KEY
          , PASSWORD
          ,ORGANIZATION_ID
-        from T_MANAGE_USER
+        from t_manage_user
     </select>
 
     <!--查询记录-->
@@ -185,7 +185,7 @@
         , STR_KEY
         , PASSWORD
         ,ORGANIZATION_ID
-        from T_MANAGE_USER
+        from t_manage_user
         <where>
             <if test="isAdministrator!= null and isAdministrator!= ''">
                 <![CDATA[   and IS_ADMINISTRATOR = #{isAdministrator,jdbcType=VARCHAR}]]>
@@ -250,7 +250,7 @@
 
     <!--查询记录数-->
     <select id="queryCount" resultType="long" parameterType="com.platform.admin.domain.User">
-        select count(1) from T_MANAGE_USER
+        select count(1) from t_manage_user
         <where>
             <if test="locked!=null and locked!=''">
                 <![CDATA[ and LOCKED=#{locked,jdbcType=INTEGER}]]>

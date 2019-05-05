@@ -141,15 +141,18 @@
                                     <i class="fa fa-user"></i>
                                     </span>
                                     <select name="roles" class="form-control select2_sample1" multiple="multiple" validate='{"required": true}'>
+
                                         <#list roleList as p>
-                                            <#assign str1=(userInfo.roles)?split(",")>
                                             <#assign isSuccess=true>
-                                            <#list str1 as s>
-                                                <#if s == p.id>
-                                                    <#assign isSuccess=false>
-                                                    <option value="${p.id}" selected="true">${p.roleName}</option>
-                                                </#if>
-                                            </#list>
+                                            <#if userInfo.roles?exists>
+                                            <#assign str1=(userInfo.roles)?split(",")>
+                                                <#list str1 as s>
+                                                    <#if s == p.id>
+                                                        <#assign isSuccess=false>
+                                                        <option value="${p.id}" selected="true">${p.roleName}</option>
+                                                    </#if>
+                                                </#list>
+                                            </#if>
                                             <#if isSuccess == true>
                                                 <option value="${p.id}">${p.roleName}</option>
                                             </#if>

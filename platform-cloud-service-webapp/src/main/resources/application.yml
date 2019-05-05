@@ -4,6 +4,13 @@ eureka:
   client:
     service-url:
       defaultZone: @mvn.spring.cloud.euerka.server@
+hystrix:
+  command:
+      default:
+        execution:
+          isolation:
+            thread:
+              timeoutInMilliseconds: 5000
 spring:
   application:
     name: platform-webapp

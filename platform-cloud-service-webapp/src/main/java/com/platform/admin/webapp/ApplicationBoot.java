@@ -16,7 +16,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  */
 @EnableDiscoveryClient // Eureka Discovery Client 标识
 @EnableFeignClients(basePackages = {"com.platform.admin.api"})
-@ServletComponentScan("com.platform.admin.security")
+//@ServletComponentScan("com.platform.admin.security")
 @SpringBootApplication(scanBasePackages = {"com.platform.admin"}) // Spring Boot 应用标识
 public class ApplicationBoot {
 

@@ -1,6 +1,8 @@
 package com.platform.admin.api.vo.tree;
 
 import java.io.Serializable;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 /**
@@ -46,6 +48,10 @@ public class TreeNode implements Serializable {
      */
     private String url;
 
+    private String title;
+
+    private String path;
+
     /**
      * 目标框架
      */
@@ -64,7 +70,7 @@ public class TreeNode implements Serializable {
     /**
      * 子节点
      */
-    private List children;
+    private List<TreeNode> children;
 
     public List getChildren() {
         return children;
@@ -94,7 +100,22 @@ public class TreeNode implements Serializable {
         return url;
     }
 
+    public static void main(String [] args){
+        String url = "http://localhost:4043///asfa/asf";
+        try {
+            System.out.println(new URI(url).getPath());
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void setUrl(String url) {
+
+        try {
+            this.path = new URI(url).getPath();
+        } catch (URISyntaxException e) {
+
+        }
         this.url = url;
     }
 
@@ -135,6 +156,7 @@ public class TreeNode implements Serializable {
     }
 
     public void setText(String text) {
+        this.title = text;
         this.text = text;
     }
 
@@ -152,5 +174,21 @@ public class TreeNode implements Serializable {
 
     public void setParentId(String parentId) {
         this.parentId = parentId;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

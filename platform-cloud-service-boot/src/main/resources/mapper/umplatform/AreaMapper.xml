@@ -15,12 +15,12 @@
     </resultMap>
     <!--删除记录-->
     <delete id="delete" parameterType="com.platform.admin.domain.Area">
-        delete from T_MANAGE_AREA where CODE=#{code,jdbcType=INTEGER}
+        delete from t_manage_area where CODE=#{code,jdbcType=INTEGER}
     </delete>
 
     <!--插入记录-->
     <insert id="insert" parameterType="com.platform.admin.domain.Area">
-        insert into T_MANAGE_AREA ( ID
+        insert into t_manage_area ( ID
         , NAME
         , PARENT_CODE
         , UPDATED
@@ -45,7 +45,7 @@
 
     <!--更新记录-->
     <update id="update" parameterType="com.platform.admin.domain.Area">
-        update T_MANAGE_AREA set NAME=#{name,jdbcType=VARCHAR}
+        update t_manage_area set NAME=#{name,jdbcType=VARCHAR}
         , PARENT_CODE=#{parentCode,jdbcType=INTEGER}
         , UPDATED=#{updated,jdbcType=TIMESTAMP}
         , AREA_ORDER=#{areaOrder,jdbcType=INTEGER}
@@ -67,7 +67,7 @@
         , CREATED
         , DATA_TYPE
         , CODE
-        from T_MANAGE_AREA where CODE=#{code,jdbcType=INTEGER}
+        from t_manage_area where CODE=#{code,jdbcType=INTEGER}
     </select>
 
     <!--查询记录-->
@@ -81,7 +81,7 @@
         , CREATED
         , DATA_TYPE
         , CODE
-        from T_MANAGE_AREA
+        from t_manage_area
         ORDER  BY AREA_TYPE, CODE,CREATED
     </select>
 
@@ -96,7 +96,7 @@
         , CREATED
         , DATA_TYPE
         , CODE
-        from T_MANAGE_AREA
+        from t_manage_area
         <where>
             <if test="name!= null and name!= ''">
                 <![CDATA[   and NAME = #{name,jdbcType=VARCHAR}]]>

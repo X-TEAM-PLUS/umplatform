@@ -18,7 +18,7 @@
     </resultMap>
     <!--删除记录-->
     <delete id="delete" parameterType="com.platform.admin.domain.Resource">
-      delete from T_MANAGE_RESOURCE  where ID=#{id,jdbcType=VARCHAR}
+      delete from t_manage_resource  where ID=#{id,jdbcType=VARCHAR}
   </delete>
 
     <!--插入记录-->
@@ -26,7 +26,7 @@
         <selectKey keyProperty="id" resultType="String" order="BEFORE">
             select uuid()
         </selectKey>
-        insert into T_MANAGE_RESOURCE ( ID
+        insert into t_manage_resource ( ID
         , ICON
         , NAME
         , UPDATED
@@ -55,7 +55,7 @@
 
     <!--更新记录-->
     <update id="update" parameterType="com.platform.admin.domain.Resource">
-    update  T_MANAGE_RESOURCE
+    update  t_manage_resource
     <set>
         <trim prefix="" suffix="" suffixOverrides=",">
             <if test="icon!=null">
@@ -107,7 +107,7 @@
  , RESOURCE_TYPE
  , PARENT_ID
  , APP_ID
- from T_MANAGE_RESOURCE  where ID=#{id,jdbcType=VARCHAR}
+ from t_manage_resource  where ID=#{id,jdbcType=VARCHAR}
 </select>
 
     <!--查询记录-->
@@ -124,7 +124,7 @@
  , RESOURCE_TYPE
  , PARENT_ID
  , APP_ID
- from T_MANAGE_RESOURCE
+ from t_manage_resource
   order BY CREATED
 </select>
 
@@ -142,7 +142,7 @@
         , RESOURCE_TYPE
         , PARENT_ID
         , APP_ID
-        from T_MANAGE_RESOURCE
+        from t_manage_resource
         <where>
             <if test="icon!= null and icon!= ''">
                 <![CDATA[   and ICON = #{icon,jdbcType=VARCHAR}]]>

@@ -111,14 +111,14 @@
             <id>develop</id>
             <properties>
                 <!-- euerka注册中心地址-->
-                <mvn.spring.cloud.euerka.server>http://localhost:8888/eureka/</mvn.spring.cloud.euerka.server>
+                <mvn.spring.cloud.euerka.server>http://10.10.40.121:3181/eureka,http://10.10.40.121:3181/eureka</mvn.spring.cloud.euerka.server>
             </properties>
         </profile>
         <profile>
             <id>test</id>
             <properties>
                 <!-- euerka注册中心地址-->
-                <mvn.spring.cloud.euerka.server>http://113.209.111.211:8888/eureka/</mvn.spring.cloud.euerka.server>
+                <mvn.spring.cloud.euerka.server>http://10.10.88.17:3181/eureka/,http://10.10.88.17:3182/eureka,http://10.10.88.17:3183/eureka</mvn.spring.cloud.euerka.server>
             </properties>
         </profile>
         <profile>

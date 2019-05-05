@@ -130,15 +130,14 @@
             <id>develop</id>
             <properties>
                 <!-- euerka注册中心地址-->
-                <mvn.spring.cloud.euerka.server>http://10.10.40.121:3181/eureka/,http://10.10.40.121:3182/eureka
-                </mvn.spring.cloud.euerka.server>
+                <mvn.spring.cloud.euerka.server>http://10.10.40.121:3181/eureka,http://10.10.40.121:3182/eureka,http://10.10.40.121:3183/eureka</mvn.spring.cloud.euerka.server>
                 <!--数据库连接-->
                 <mvn.jdbc.url>
-                    <![CDATA[jdbc:mysql://127.0.0.1:3306/umplatform?useUnicode=true&characterEncoding=utf-8]]></mvn.jdbc.url>
+                    <![CDATA[jdbc:mysql://10.10.40.122:3306/umplatform?useUnicode=true&characterEncoding=utf-8]]></mvn.jdbc.url>
                 <mvn.jdbc.user>root</mvn.jdbc.user>
-                <mvn.jdbc.pwd>mysql</mvn.jdbc.pwd>
+                <mvn.jdbc.pwd>admin</mvn.jdbc.pwd>
                 <!--日志输出目录-->
-                <mvn.log.path>d:/logs</mvn.log.path>
+                <mvn.log.path>/data/logs/mars</mvn.log.path>
                 <mvn.log.level>DEBUG</mvn.log.level>
                 <mvn.redis.ip>127.0.0.1</mvn.redis.ip>
                 <mvn.redis.port>6379</mvn.redis.port>
@@ -151,7 +150,7 @@
                 <mvn.spring.cloud.euerka.server>http://10.10.88.17:3181/eureka/,http://10.10.88.17:3182/eureka,http://10.10.88.17:3183/eureka</mvn.spring.cloud.euerka.server>
                 <!--数据库连接-->
                 <mvn.jdbc.url>
-                    <![CDATA[jdbc:mysql://10.10.40.122:3306/umplatform?useUnicode=true&characterEncoding=utf-8]]></mvn.jdbc.url>
+                    <![CDATA[jdbc:mysql://10.10.88.18:3306/umplatform?useUnicode=true&characterEncoding=utf-8]]></mvn.jdbc.url>
                 <mvn.jdbc.user>root</mvn.jdbc.user>
                 <mvn.jdbc.pwd>admin</mvn.jdbc.pwd>
                 <!--日志输出目录-->
@@ -166,17 +165,17 @@
             <properties>
                 <!-- euerka注册中心地址-->
                 <mvn.spring.cloud.euerka.server>
-                    http://172.31.204.15:8888/eureka/
+                    http://eureka1.internalapus.com:3181/eureka,http://eureka2.internalapus.com:3181/eureka,http://eureka3.internalapus.com:3181/eureka
                 </mvn.spring.cloud.euerka.server>
                 <!--数据库连接-->
                 <mvn.jdbc.url>
-                    <![CDATA[jdbc:mysql://127.0.0.1:3306/umplatform?useUnicode=true&characterEncoding=utf-8]]></mvn.jdbc.url>
-                <mvn.jdbc.user>root</mvn.jdbc.user>
-                <mvn.jdbc.pwd>uuZd2xlHeWJorTkC</mvn.jdbc.pwd>
+                    <![CDATA[jdbc:mysql://alarm-mysql-rw.apusdb.com:3306/apus_umplatform?useUnicode=true&characterEncoding=utf-8]]></mvn.jdbc.url>
+                <mvn.jdbc.user>umplatform_rw</mvn.jdbc.user>
+                <mvn.jdbc.pwd>JD2*12lI$dksi2aplJKm</mvn.jdbc.pwd>
                 <!--日志输出目录-->
                 <mvn.log.path>/data/logs/mars</mvn.log.path>
                 <mvn.log.level>INFO</mvn.log.level>
-                <mvn.redis.ip>127.0.0.1</mvn.redis.ip>
+                <mvn.redis.ip>10.65.34.100</mvn.redis.ip>
                 <mvn.redis.port>6379</mvn.redis.port>
             </properties>
         </profile>
